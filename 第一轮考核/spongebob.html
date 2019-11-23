@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <link href="sb.css" rel="stylesheet" type="text/css">
+    <title>SpongeBob</title>
+</head>
+
+<body>
+<!--动画简介部分开始-->
+<div id="part1">
+    <a name="part1"></a> 
+    <div id="h1">SpongeBob</div>
+    <ul>
+    <li><a href="#part4">意见反馈</a></li>
+    <li><a href="#part3">播放情况</a></li>
+    <li><a href="#part2">主要人物</a></li>
+    <li><a href="#part1">动画简介</a></li>
+    </ul>
+    <div id="title">
+        <span id="p1">海绵宝宝</span><br />
+        <span id="p2">SpongeBob</span><br />
+        <p id="p3">《海绵宝宝》的故事情节主要围绕着主角海绵宝宝和他的好朋友派大星、邻居章鱼哥、上司蟹老板等人展开，
+                    场景设定于太平洋海底，一座被称为比奇堡的城市
+        </p>
+    </div>
+    <img src="intro_show.jpeg">
+</div>
+<!--动画简介部分结束-->
+
+<!--主要人物部分开始-->
+<div id="part2">
+    <a name="part2"></a> 
+    <div id="title2">
+        <div id="the">The</div>
+        <div id="lead">Leading roles</div><br />
+    </div>
+    <div id="context">
+    <div id="hm">
+        <div class="txt">
+        <div class="ltitle">海绵宝宝</div><br />
+        <div class="lcon">海绵宝宝是一只可爱的生物,他快乐的生活在比奇堡里</div>
+        </div>
+        <a href="#"><img src="haimianbaobao.jpeg"></a>
+    </div>
+    <div id="zyg">
+        <div class="txt">
+        <div class="ltitle">章鱼哥</div><br />
+        <div class="lcon">章鱼哥是一只可爱的生物,他快乐的生活在比奇堡里</div>
+        </div>
+        <a href="#"><img src="zhangyuge.jpeg"></a>
+    </div>
+    <div id="xlb">
+        <div class="txt">
+        <div class="ltitle">蟹老板</div><br />
+        <div class="lcon">蟹老板是一只可爱的生物,他快乐的生活在比奇堡里</div>
+        </div>
+        <a href="#"><img src="xielaoban.jpeg"></a>
+    </div>
+    <div id="pdx">
+        <div class="txt">
+        <div class="ltitle">派大星</div><br />
+        <div class="lcon">派大星是一只可爱的生物,他快乐的生活在比奇堡里</div>
+        </div>
+        <a href="#"><img src="paidaxing.jpeg"></a>
+    </div>
+    <div id="plb">
+        <div class="txt">
+        <div class="ltitle">痞老板</div><br />
+        <div class="lcon">痞老板是一只可爱的生物,他快乐的生活在比奇堡里</div>
+        </div>
+        <a href="#"><img src="pilaoban.jpeg"></a>
+    </div>
+    </div>
+</div>
+<!--主要人物部分结束-->
+
+<!--播放情况部分开始-->
+<div id="part3">
+    <a name="part3"></a> 
+    <div id="title3">
+        <div id="play">Play</div>
+        <div id="is">is</div><br />
+    </div>
+    <table>
+        <tbody>
+            <tr>
+                <th class="col1">年度</th>
+                <th>播放量</th>
+            </tr>
+            <tr>
+                <td class="col1">2016</td>
+                <td>243712.47 VV</td>
+            </tr>
+            <tr>
+                <td class="col1">2017</td>
+                <td>233212.31 VV</td>
+            </tr>
+            <tr>
+                <td class="col1">2018</td>
+                <td>238712.35 VV</td>
+            </tr>
+            <tr>
+                <td class="col1">2019</td>
+                <td>234172.67 VV</td>
+            </tr>
+            <tr>
+                <td class="col1">2020</td>
+                <td>238712.37 VV</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--播放情况部分结束-->
+
+<!--意见反馈部分开始-->
+<div id="part4">
+    <a name="part4"></a>
+    <div id="feedback">Feedback</div>
+    <form method="POST" action="save.php">
+        <label for="usename">姓名：</label>
+        <input type="text" name="usename" id="usename">
+        <label id="gender" class="gend">性别：</label>
+        <input type="radio" value="female" id="female" name="gender" checked="checked">
+        <label for="female">女</label>
+        <input type="radio" value="male" id="male" name="gender">
+        <label for="male">男</label>
+        <br />
+        <label for="txt">备注：</label>
+        <textarea rows="3" cols="80" id="txt">      学弟学妹太可爱了！！学弟学妹太可爱了！！学弟学妹太可爱了！！学弟学妹太可爱了！！
+        </textarea>
+        <br />
+        <input type="submit" value="提交" name="sub">
+        <input type="reset" value="重置" name="res">
+    </form>
+</div>
+<!--意见反馈部分结束-->
+
+</body>
+</html>
