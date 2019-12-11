@@ -1,1 +1,3 @@
-# front_end_learn
+# front_end_learn  
+1.第一轮完成 （11.10）  
+2.第二轮完成 （12.8）
