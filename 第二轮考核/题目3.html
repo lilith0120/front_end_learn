@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>派大星想知道时间</title>
+    <style>
+    #div1 {
+        width: 500px;
+        height: 500px;
+        margin: 100px;
+        border:  1px solid aqua;
+        border-radius: 4px;
+    }
+    </style>
+</head>
+
+
+<body>
+    <p style="font-size: 30px">
+        派大星超想知道现在的时间的吼，但是他是一个傲娇！
+    <br>（你们可以把框框视为派大星的视野范围）
+    <br> 他虽然很想知道，但是有人（鼠标进入）的时候他就装作不想看
+    <br> 另外他还想看看是谁偷看他的，每个人在看完走后都会留下一些证据(地址啊，浏览器啊)
+    <br> 请重现这个过程
+    <div id="div1">
+        <span id="time">2019/11/20 00:05:00</span><br><br>
+        <span id="user-agent">Mozilla/5.0 (Windows NT 10.0; Win64; x64) 
+            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36</span><br><br>
+        <span id="hrefContent">
+            <span id="protocol">https:</span><br><br>
+            <span id="host">127.0.0.1:5500</span><br><br>
+            <span id="search">?a=1</span><br><br>
+            <span id="hash">#abc</span><br><br>
+            <span id="href">https://127.0.0.1:5500?a=1#abc</span><br><br>
+        </span>
+    </div>
+    <!--
+        要求在下列代码中实现
+        当打开网页的时候 时间以1000ms的速率动态更新
+        鼠标移入div1的时候 暂停时间的更新
+        鼠标移出div1的时候 继续时间的更新
+
+        （以下不用在鼠标移入移出时更新）
+        其余span里面的内容全部要根据浏览器情况动态更新
+        即当打开Edge和Chrome浏览器时 userAgent是不同的
+        当以不同路径打开的时候 hrefContent里的内容也会有所变更
+        上述代码不可修改，只能在script中修改代码
+    -->    
+    <script>
+
+        function set_two(num){
+            if(num < 10)
+                return "0"+num;
+            else
+                return num;
+        }
+
+        //y要求渲染 time里面的内容
+        function renderTime() {
+            let time = document.getElementById("time");
+            let da = new Date();
+            let y = da.getFullYear();
+            let mo = da.getMonth() + 1;
+            mo = set_two(mo);
+            let d = da.getDate();
+            d = set_two(d);
+            let h = da.getHours();
+            h = set_two(h);
+            let mi = da.getMinutes();
+            mi = set_two(mi);
+            let s = da.getSeconds();
+            s = set_two(s);
+            time.innerHTML = y+'/'+mo+'/'+d+' '+h+':'+mi+':'+s;
+            //setInterval("renderTime()",1000);
+        }
+
+        //要求渲染 userAgent里面的内容
+        function renderBrowser() {
+           let nu = navigator.userAgent;
+           let us = document.getElementById("user-agent");
+           us.innerHTML = nu;
+        }
+        
+        //要求渲染 hrefContent里面的内容
+        function renderLocation() {
+           let p = document.getElementById("protocol");
+           let ht = document.getElementById("host");
+           let sh = document.getElementById("search");
+           let hh = document.getElementById("hash");
+           let hf = document.getElementById("href");
+           p.innerHTML = location.protocol;
+           ht.innerHTML = location.host;
+           sh.innerHTML = location.search;
+           hh.innerHTML = location.hash;
+           hf.innerHTML = location.href;
+        }
+		renderBrowser();
+        renderLocation();
+        renderTime();
+		
+		//时间的更新与暂停
+        let di = document.getElementById("div1");
+        var i = setInterval(renderTime,1000);
+        di.onmouseout = function(){
+            i = setInterval(renderTime,1000);
+        }
+
+        di.onmouseover = function(){
+            clearInterval(i);
+        }
+        
+		
+    </script>
+</body>
+</html>

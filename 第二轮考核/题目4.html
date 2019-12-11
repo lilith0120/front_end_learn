@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>痞老板的深层拷贝秘方</title>
+    <style>
+    p {
+        font-size: 30px;
+    }
+    </style>
+</head>
+<body>
+    <p>痞老板超级想要蟹老板的汉堡秘方，请协助他写一个深层拷贝秘方（深拷贝）</p>
+    <p>痞老板纳闷了，每次他想要的秘方总是到不了手，拿到的东西只是地址</p>
+    <p>拷贝的也一直都是汉堡秘方的地址，他想拷贝真正的汉堡秘方</p>
+    <script>
+        // 本题为提高题，选做 
+        let secret = {
+            "name": "超级大汉堡",
+            "material": "可爱的学长"
+        }
+
+        let secret2 = secret
+        secret2.material = "傻瓜的学长"
+        console.log(secret.material)
+
+        //通过上述代码我们发现 修改secret2的值也会改变secret1的值
+        //要求写一个深拷贝函数,使得用该函数赋值后，两个变量互相不会影响
+        function deepClone(obj) {
+            if(typeof obj !== "object" || obj === null)
+                return obj;
+            let t = Array.isArray(obj) ? [] : {};
+            for(let i in obj){
+                if(obj.hasOwnProperty(i)){
+                    t[i] = deepClone(obj[i]);
+                }
+            }
+
+            return t;
+        }
+
+        let secret3 = deepClone(secret)
+        secret3.material = '可爱的学长w'
+        console.log(secret.material) //仍为 "傻瓜的学长"
+
+    
+    </script>
+</body>
+</html>
