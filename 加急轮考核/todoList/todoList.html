@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <link href="todoList.css" rel="stylesheet" type="text/css">
+    <!--外接CSS-->
+    <title>ToDoList</title>
+</head>
+
+<body>
+
+    <div id="tips">
+        <div id="tip" onclick="show_tips()" title="小提示">Tips</div>
+    </div>
+
+    <div id="header">
+        ToDoList
+        <input type="text" id="add_thing" placeholder="click here to add something to do">
+        <img src="add.png" class="logo" title="点击添加事件" onclick="submit()">
+    </div>
+
+    <div class="sec_title">
+        <img src="load.png" class="logo">
+        In Progress
+        <img src="delete.png" class="delete_logo" title="删除" onclick="delete_some1()">
+        <img src="edit.png" class="edit_logo" title="编辑" onclick="edit_some()">
+        <div id="count1">0</div>
+    </div>
+
+    <div class="put_thing">
+        <div id="tip1">Oh, you have nothing to do!</div>
+        <ul id="load_thing">
+            <!--用于填充正在完成的事情-->
+        </ul>
+    </div>
+
+    <div class="sec_title">
+        <img src="finished.png" class="logo">
+        Completed
+        <img src="delete.png" class="delete_logo" title="删除" onclick="delete_some2()">
+        <div id="count2">0</div>
+    </div>
+
+    <div class="put_thing">
+        <div id="tip2">Oh, you have done nothing!</div>
+        <ul id="finished_thing">
+            <!--用于填充已完成的事情-->
+        </ul>
+    </div>
+
+    <p id="myself">
+        2019 © Copyright 吴寒 All Right Reserved.
+        <img src="delete.png" class="logo" id="delete_all" title="一键清空事件">
+    </p>
+
+    <!--外接JS-->
+    <script src="todoList.js" type="text/javascript"></script>
+</body>
+</html>

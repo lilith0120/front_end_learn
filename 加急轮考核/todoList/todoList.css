@@ -1,0 +1,169 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-family: "Microsoft Yahei";
+    background-color: #f2efde;
+}
+
+html{
+    height: 100%;
+    font-size: 62.5%;
+}
+
+/**********************导航栏*************************/
+#tips{
+    position: fixed;
+    width: 10%;
+    top: 30%;
+}
+
+#tip{
+    position: absolute;
+    font-size: 3rem;
+    font-size: 30px;
+    text-align: center;
+    background-color: #2e2c2f;
+    opacity:0.5;
+    border-radius: 0.5rem;
+    border-radius: 5px;
+    color:#f2efde;
+    padding:0.5rem;
+    padding:5px;
+    width: 50%;
+}
+
+#header{
+    padding: 2%;
+    padding-left: 17%;
+    font-size: 5rem;
+    font-size: 50px;
+    color: #f2efde;
+    letter-spacing: 0.5rem;
+    letter-spacing: 5px;
+    background-color: #2e2c2f;
+    font-weight: bold;
+}
+
+#add_thing{
+    width: 30%;
+    height: 4rem;
+    margin-left: 20%;
+    margin-top: 1%;
+    border-radius: 0.7rem;
+    text-indent: 2rem;
+    font-size: 2rem;
+    vertical-align: top;
+    color: #2e2c2f;
+    box-shadow: 1px 1px 7px #2e2c2f inset;
+}
+
+.logo{
+    width: 4%;
+}
+
+/**********************各种框框*************************/
+.delete_logo{
+    width: 4%;
+    float: right;
+    margin-right: 31%;
+    margin-top: 1%;
+}
+
+.edit_logo{
+    width: 4%;
+    float: right;
+    margin-right: 2%;
+    margin-top: 1%;
+}
+
+#count1, #count2{
+    float: right;
+    margin-right: 3%;
+    margin-top: 1.5%;
+    padding: 0.5%;
+    padding-left: 1%;
+    font-size: 2rem;
+    color: #f2efde;
+    background-color: #2e2c2f;
+    opacity:0.5;
+    border-radius: 5rem;
+}
+
+.sec_title{
+    margin-top: 5%;
+    margin-left: 21%;
+    font-size: 2.5rem;
+    font-size: 25px;
+    font-weight: bold;
+    color: #2e2c2f;
+    letter-spacing: 0.5rem;
+    letter-spacing: 5px;
+}
+
+.put_thing{
+    margin-top: 3%;
+    margin-left: 25%;
+    width: 50%;
+    height: 21rem;
+    border: 4px #2e2c2f solid;
+    box-shadow: 1px 1px 7px #2e2c2f inset;
+    border-radius: 0.5rem;
+    overflow: auto;
+}
+
+.put_thing > div{
+    background-color: #2e2c2f;
+    opacity:0.3;
+    text-align: center;
+    line-height: 21rem;
+    color: #a1a098;
+    font-size: 2rem;
+}
+
+.put_thing  ul{
+    margin-left: 4%;
+    width: 92%;
+    font-size: 2rem;
+}
+
+.put_thing li{
+    margin: 4% 0;
+    list-style-type: none;
+}
+
+.put_thing li img{
+    width: 4%;
+    margin-right: 2%;
+}
+
+.put_thing #time_id{
+    float: right;
+}
+
+.put_thing input[type=radio]{
+    margin-left: 2%;
+    width: 2rem;
+    height: 2rem;
+}
+
+.put_thing input[type=checkbox]{
+    margin-left: 2%;
+    width: 2rem;
+    height: 2rem;
+}
+
+/**********************结尾部分*************************/
+#myself{
+    margin-top: 7%;
+    margin-bottom: 1%;
+    text-align: center;
+    color: #2e2c2f;
+    font-size: 1.4rem;
+    letter-spacing: 0.4rem;
+}
+
+#delete_all{
+    width: 2%;
+}
