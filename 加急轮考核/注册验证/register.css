@@ -1,0 +1,187 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-family: "Microsoft Yahei";
+}
+
+html{
+    height: 100%;
+    font-size: 62.5%;
+}
+
+body{
+    background-image: url("back.png");
+}
+
+/**********************导航栏*************************/
+#header{
+    padding: 1%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3rem;
+    letter-spacing: 0.5rem;
+    color: #576d75;
+}
+
+/***********************按钮**************************/
+.btn{
+    width: 10%;
+    height: 4rem;
+    margin-top: 10%;
+    border-radius: 3rem;
+    color: #ffffff;
+    background-color: #576d75;
+    border: #576d75;
+    outline: none;
+    font-size: 1.8rem;
+}
+
+/***********************输入框**************************/
+.in{
+    margin-left: 4%;
+    border: 2px #576d75 solid;
+    outline: none;
+    background-color: #ffffff;
+    width: 44%;
+    height: 4rem;
+    border-radius: 3rem;
+    box-shadow: 1px 1px 2px #2e2c2f inset;
+    text-indent: 2rem;
+    font-size: 2rem;
+    color: #576d75;
+    
+}
+
+.in::-ms-reveal{display: none;}
+
+/***********************注意事项**************************/
+.tips{
+    margin-top: 1%;
+    margin-left: 6%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.tips_part{
+    color: #ff5b5b;
+}
+
+/**********************步骤一*************************/
+#step1{
+    margin-top: 1%;
+    margin-left: 18%;
+}
+
+#input_user{
+    margin-top: 1.2%;
+    margin-left: 33%;
+    font-size: 2.5rem;
+    color: #576d75;
+}
+
+#user{
+    width: 3%;
+}
+
+#i_user{
+    margin-top: 5%;
+}
+
+#btn1{
+    margin-left: 35%;
+}
+
+#tips1{
+    opacity: 0.5;
+}
+
+/**********************步骤二*************************/
+#step2{
+    margin-top: 1%;
+    margin-left: 17.9%;
+}
+
+#input_email{
+    margin-top: 0.3%;
+    margin-left: 33%;
+    font-size: 2.5rem;
+    color: #576d75;
+}
+
+#email{
+    width: 3%;
+}
+
+#i_email{
+    margin-top: 5%;
+}
+
+#btn12{
+    margin-left: 7%;
+}
+
+#btn2{
+    margin-left: 17%;
+}
+
+#tips2{
+    opacity: 0.5;
+}
+
+/**********************步骤三*************************/
+#step3{
+    margin-left: 17.1%;
+}
+
+#input_pswd{
+    margin-left: 33%;
+    font-size: 2.5rem;
+    color: #576d75;
+}
+
+.pswd{
+    width: 3%;
+}
+
+#i_pswd{
+    margin-top: 2%;
+}
+
+#conpswd{
+    margin-top: 4%;
+}
+
+#i_conpswd{
+    margin-top: 2%;
+}
+
+#btn23{
+    margin-left: 7%;
+}
+
+#btn3{
+    margin-left: 17%;
+}
+
+#tips3{
+    opacity: 0.5;
+}
+
+#show, #hide{
+    width: 4%;
+}
+
+/**********************结尾部分*************************/
+#myself{
+    height: 4rem;
+    line-height: 4rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: #576d75;
+    font-size: 1.4rem;
+    letter-spacing: 0.4rem;
+}
