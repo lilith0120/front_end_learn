@@ -101,7 +101,13 @@ document.getElementById("btn3").onclick = function(){
         return;
     }
 
-    alert("Congratulations on your successful email registration!");
+    let text = window.location.href;
+    let i = text.length-1;
+    for(;text[i] != '/';i--);
+    let string = text.substr(0, i);
+    text = string + "/home_page.html";
+    //alert("Congratulations on your successful email registration!");
+    window.location.href = text;
 }
 
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <title>Home Page</title>
+
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        html{
+            background-image: url("back.png");
+            height: 100%;
+            font-size: 62.5%;
+        }
+
+        body{
+            height: 100%;
+        }
+
+        div{
+            height: 100%;
+            line-height: 60rem;
+            width: 100%;
+            font-size: 3rem;
+            color: #576d75;
+            text-align: center;
+        }
+
+        p{
+            height: 100%;
+            font-size: 5rem;
+            color: #576d75;
+        }
+
+    </style>
+    
+</head>
+
+<body>
+
+    <div id="jump">注册成功！<span id="cnt">3</span>秒后跳转至主页面……</div>
+    <div id="home">
+    <p>
+        Welcome to the homepage!
+    </p>
+    </div>
+
+    <script>
+
+        var cnt = document.getElementById("cnt");
+        function jump_url(num){
+            cnt.innerHTML = num;
+            if(num > 0){
+                num--;
+                document.getElementById("home").style.display = "none";
+                setTimeout("jump_url("+num+")", 1000);
+            }
+            else{
+                document.getElementById("jump").style.display = "none";
+                document.getElementById("home").style.display = "block";
+            }
+        }
+
+        jump_url(3);
+
+    </script>
+
+</body>
+</html>
