@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/edit_job.css" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--外接CSS-->
+    <title>EditJob</title>
+    <!--外接JS-->
+    <script src="js/jquery.js"></script>
+    <script src="js/edit_job.js"></script>
+</head>
+
+<body>
+    
+    <div id="title">
+        <i class="fa fa-arrow-left fa-lg fa-fw"></i>
+    </div>
+
+    <form id="job_message" method="POST" target="no_show">
+        <div id="jname">
+            <span class="require">* </span>考核名称：
+            <input type="text" name="job_name" required oninvalid="setCustomValidity('考核名称不能为空！')" oninput="setCustomValidity('')">
+        </div>
+
+        <div id="jddl">
+            <span class="require">* </span>截止日期：
+            <input type="date" name="job_deadline" required oninvalid="setCustomValidity('截止日期不能为空！')" oninput="setCustomValidity('')">
+        </div>
+
+        <div id="jexplain">
+            &nbsp;&nbsp;考核说明：
+            <textarea name="job_explain"></textarea>
+        </div>
+
+        <input type="submit" id="job_btn" value="保存">
+    </form>
+
+    <iframe name="no_show"></iframe>
+
+</body>
+</html>

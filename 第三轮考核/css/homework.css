@@ -1,0 +1,142 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-family: "Microsoft Yahei";
+    background-color: #fbfbfb;
+}
+
+html{
+    height: 100%;
+    font-size: 62.5%;
+}
+
+#content{
+    width: 50%;
+    height: 66rem;
+    margin: 2% auto;
+    text-align: center;
+    border-radius: 0.2rem;
+    background-color: #fff;
+}
+
+#header{
+    padding: 4% 0;
+    border-radius: 0.2rem;
+    text-align: center;
+    background-color: #db4550;
+}
+
+#content-name{
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #db4550;
+}
+
+#content-explain{
+    width: 80%;
+    height: 15rem;
+    margin: 4% auto;
+    background-color: #fff;
+}
+
+#content-explain-text{
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+#content-title{
+    height: 4rem;
+    text-align: center;
+    background-color: #fff;
+}
+
+.line{
+    display: inline-block;
+    width: 37%;
+    border-top: #DDD 2px solid;
+}
+
+#content-title-name{
+    padding: 1% 4%;
+    background-color: #db4550;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 5rem;
+    vertical-align: middle;
+}
+
+#content-require{
+    margin: 3% 0;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: #fff;
+}
+
+.require{
+    color: #db4550;
+    background-color: #fff;
+}
+
+#content-left{
+    display: inline-block;
+    background-color: #fff;
+}
+
+#content-right{
+    display: inline-block;
+    margin-left: 8%;
+    margin-right: 4%;
+    background-color: #fff;
+}
+
+input[type=text]{
+    outline: none;
+    width: 70%;
+    height: 3.5rem;
+    font-size: 2rem;
+    background-color: #fff;
+    border: #DDD 1px solid;
+}
+
+#content-file{
+    width: 88%;
+    height: 12rem;
+    margin: 4% auto 3% auto;
+    border: 1px #e1e1e1 solid;
+    background-image: url("load-thing.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f9f9f9;
+    border-radius: 0.5rem;
+}
+
+input[type=file]{
+    width: 100%;
+    height: 12rem;
+    opacity: 0;
+}
+
+#content-submit{
+    background-color: #fff;
+    margin: 0 auto;
+    width: 20%;
+}
+
+input[type=submit]{
+    border-style: none;
+    border: 1px solid #00bbd3;
+    width: 100%;
+    height: 5rem;
+    font-size: 2rem;
+    color: #00bbd3;
+    border-radius: 0.2rem;
+}
+
+input[type=submit]:hover{
+    background-color: #00bbd3;
+    color: #fff;
+}

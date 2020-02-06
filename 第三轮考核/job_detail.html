@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/job_detail.css" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--外接CSS-->
+    <title>JobDetail</title>
+    <!--外接JS-->
+    <script src="js/jquery.js"></script>
+    <script src="js/job_detail.js"></script>
+</head>
+
+<body>
+    
+    <div id="title">
+        <i class="fa fa-arrow-left fa-lg fa-fw"></i>
+        <span id="delt">
+            批量删除
+        </span>
+    </div>
+
+    <div id="job_table">
+        <table>
+            <tbody>
+                <tr>
+                    <th id="check"><input type="checkbox"></th>
+                    <th class="num">学号</th>
+                    <th class="name">姓名</th>
+                    <th class="up_time">提交时间</th>
+                    <th class="state">作业状态</th>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td class="num">111111111</td>
+                    <td class="name">行露</td>
+                    <td class="up_time">2020/01/19</td>
+                    <td class="state">
+                        <select>
+                            <option value="审核中">审核中</option>
+                            <option value="通过">通过</option>
+                            <option value="未通过">未通过</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td class="num">111801429</td>
+                    <td class="name">吴寒</td>
+                    <td class="up_time">2020/01/20</td>
+                    <td class="state">
+                        <select>
+                            <option value="审核中">审核中</option>
+                            <option value="通过">通过</option>
+                            <option value="未通过">未通过</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td class="num">221801107</td>
+                    <td class="name">大猫猫</td>
+                    <td class="up_time">2020/01/20</td>
+                    <td class="state">
+                        <select>
+                            <option value="审核中">审核中</option>
+                            <option value="通过">通过</option>
+                            <option value="未通过">未通过</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="page_box">共 0 条</div>
+
+</body>
+</html>
