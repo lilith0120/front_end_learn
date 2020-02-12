@@ -106,7 +106,7 @@ html{
     background-color: #286090;
 }
 
-#error_same, #error_wrong{
+#error_same{
     display: none;
     background-color: #fbfbfb;
     color: #ed3f14;

@@ -15,30 +15,36 @@ $(function(){
     let job_btn = $("#job_btn");
     job_btn.click(function(){
 
-        if(job_name.val() != "" && job_deadline.val() != "") {
-            let json_data = {
-                "taskName": job_name.val(),
-                "taskContent": job_explain.val(),
-                "startDate": time,
-                "deadline": job_deadline.val(),
-            }
-            console.log(json_data);
-    
-            $.ajax({
-                url: "/Administrators/tasks",
-                type: "POST",
-                data: json_data,
-                dataType: 'json',
-    
-                success: function(data) {
-                    let id = data.taskId;
-                    //...这个地方后端还没搞，我自己先搁这
+        if(job_name.val() == "" || job_deadline.val() == "") {
+            return;
+        }
+
+        let data = {
+            taskName: job_name.val(),
+            taskContent: job_explain.val(),
+            startDate: time,
+            deadline: job_deadline.val(),
+        }
+
+        let json_data = JSON.stringify(data);
+        //console.log(json_data);
+        
+        $.ajax({
+            url: "/api/administrators/tasks",
+            type: "POST",
+            data: json_data,
+            dataType: 'json',
+            contentType: "application/json",
+
+            success: function(data) {
+                if(data.status == 200) {
+                    alert("成功建立考核！考核的ID为：" + data.data);
                     job_name.val("");
                     job_deadline.val("");
                     job_explain.val("");
                 }
-            });
-        }
+            }
+        });
     });
 
 });

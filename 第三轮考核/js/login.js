@@ -78,49 +78,65 @@ $(document).ready(function(){
     });
 
     //跳转页面
-    
+    //登陆
     $("#login_btn").click(function() {
-        if(login_name.val() != "" && login_pswd.val() != "") {
-            let json_data = {
-                "accountId": login_name.val(),
-                "passWord": login_pswd.val(),
-            }
-            console.log(json_data);
-        
-            $.ajax({
-                url: "/users/login",
-                type: "POST",
-                data: json_data,
-                dataType: 'json',
-                success: function(data) {
-                    //...这里判断密码是否正确
-                }
-            });
+
+        if(login_name.val() == "" || login_pswd.val() == "") {
+            return;
         }
 
-        if($("#error_wrong").is(':hidden') && login_name.val() != "" && login_pswd.val() != "") {
-            $(location).attr("href", "http://127.0.0.1:5500/3/back.html");//跳转到后台
+        let data = {
+            accountName: login_name.val(),
+            passWord: login_pswd.val(),
         }
+        //console.log(json_data);
+    
+        let json_data = JSON.stringify(data);
+        $.ajax({
+            url: "/api/users/login",
+            type: "POST",
+            data: json_data,
+            dataType: 'json',
+            contentType: "application/json",
+
+            success: function(data) {
+                if(data.data == 0) {
+                    alert(data.info);
+                }
+                else {
+                    $(location).attr("href", "back.html");
+                }
+            }
+        });
     });
 
+    //注册
     $("#register_btn").click(function() {
 
-        if($("#error_same").is(':hidden') && register_name.val() != "" && pswd.val() != "") {
-            let json_data = {
-                "accountId": register_name.val(),
-                "passWord": pswd.val(),
-            }
-            console.log(json_data);
-        
-            $.ajax({
-                url: "/users/login",
-                type: "POST",
-                data: json_data,
-                dataType: 'json',
-            });
-
-            $(location).attr("href", "http://127.0.0.1:5500/3/back.html");//跳转到后台
+        if($("#error_same").is(':visible') || register_name.val() == "" || pswd.val() == "") {
+            return;
         }
 
+        let data = {
+            accountName: register_name.val(),
+            passWord: pswd.val(),
+        }
+        //console.log(json_data);
+    
+        let json_data = JSON.stringify(data);
+        $.ajax({
+            url: "/api/users",
+            type: "POST",
+            data: json_data,
+            dataType: 'json',
+            contentType: "application/json",
+
+            success: function(data) {
+                if(data.status == 200) {
+                    $(location).attr("href", "back.html");//跳转到后台
+                }
+            }
+        });
+        //这里后端还在开发中，待定
     });
 });

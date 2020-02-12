@@ -24,28 +24,33 @@ $(function(){
     });
 
     $("#pswd_btn").click(function() {
-        if(o_pswd.val() == "" || n_pswd.val() == "") {
+        if(o_pswd.val() == "" || n_pswd.val() == "" || $("#error_same").is(':visible') || $("#error_wrong").is(':visible')) {
             return;
         }
 
-        if($("#error_same").is(':hidden') && $("#error_wrong").is(':hidden')) {
-            let json_data = {
-                "passWord": $("input[name='n_pswd']").val(),
-            }
-            //console.log(json_data);
-
-            $.ajax({
-                url: "/users",
-                type: "PUT",
-                data: json_data,
-                dataType: 'json',
-            });
-
-            $("#page").hide();
-            $("#change").fadeIn(3000).fadeOut(1000, function() {
-                $("#page").fadeIn();
-                $(".input_pswd").val("");
-            });
+        let data = {
+            oldPassword: $("input[name='o_pswd']").val(),
+            newPassword: $("input[name='n_pswd']").val(),
         }
+        //console.log(json_data);
+
+        let json_data = JSON.stringify(data);
+        $.ajax({
+            url: "/api/users",
+            type: "PUT",
+            data: json_data,
+            dataType: 'json',
+            contentType: "application/json",
+
+            success: function(data) {
+                if(data.status == 200) {
+                    $("#page").hide();
+                    $("#change").fadeIn(3000).fadeOut(1000, function() {
+                        $("#page").fadeIn();
+                        $(".input_pswd").val("");
+                    });
+                }
+            }
+        });
     });
 });

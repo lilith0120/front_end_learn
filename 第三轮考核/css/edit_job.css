@@ -1,24 +1,20 @@
 
-*{
-    margin: 0;
-    padding: 0;
-    position: relative;
-    font-family: "Microsoft Yahei";
-    background-color: #fff;
+#edit_job{
+    display: none;
 }
 
-html{
-    height: 100%;
-    font-size: 62.5%;
-}
-
-#title{
+#back_title{
     color: #83878f;
+    
     font-size: 2rem;
     font-weight: bold;
     letter-spacing: 0.1rem;
     margin-top: 2%;
     margin-left: 3%;
+}
+
+#back{
+    background-color: #fff;
 }
 
 #job_message{

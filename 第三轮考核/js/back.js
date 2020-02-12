@@ -56,4 +56,21 @@ $(function(){
         hide_tag.hide();
         $("#second_title").hide();
     });
+
+    //退出登录
+    $('#login_out').click(function() {
+        let json_data = {};
+        
+        $.ajax({
+            url: "/api/users/logout",
+            type: "DELETE",
+            data: json_data,
+            dataType: "json",
+            contentType: "application/json",
+
+            success: function() {
+                $(location).attr("href", "login.html");
+            }
+        });
+    });
 });

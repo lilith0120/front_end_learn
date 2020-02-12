@@ -4,7 +4,7 @@ $(function(){
     let back = $(".fa-arrow-left");
     back.click(function(){
 
-        $(location).attr("href", "http://127.0.0.1:5500/3/job_list.html");
+        $(location).attr("href", "job_list.html");
         
     });
     
