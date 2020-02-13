@@ -54,7 +54,7 @@ $(function () {
         let file_type = file.name.substr(point);
         //console.log(file_type);
         
-        if(file_type != ".zip" && file_type != ".rar") {
+        if(file_type != ".zip") {
             alert("文件格式错误！");
             return;
         }

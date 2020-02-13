@@ -1,18 +1,9 @@
 
-*{
-    margin: 0;
-    padding: 0;
-    position: relative;
-    font-family: "Microsoft Yahei";
-    background-color: #fff;
+#job_detail{
+    display: none;
 }
 
-html{
-    height: 100%;
-    font-size: 62.5%;
-}
-
-#title{
+#detail_title{
     color: #83878f;
     font-size: 2rem;
     font-weight: bold;
@@ -37,55 +28,40 @@ html{
     background-color: #fff;
 }
 
-#job_table{
+#hjob_table{
     width: 80%;
     margin: 3% auto 2% auto;
 }
 
-table, tr{
-    border: 1px #ddd solid;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-table{
-    width: 100%;
-}
-
-th{
-    color: #222;
-    font-size: 1.6rem;
-    letter-spacing: 0.4rem;
-}
-
-td{
-    color: #666;
-    font-size: 1.4rem;
-    letter-spacing: 0.2rem;
-    background-color: #f3f8fe;
-}
-
-.name, .up_time, .num, .state{
-    width: 24%;
+.hname, .hup_time, .hnum, .hstate{
+    width: 20%;
     height: 4rem;
 }
 
-#page_box{
-    position: fixed;
-    bottom: 0;
-    border: 1px red solid;
-    width: 50%;
-    margin-left: 25%;
-    margin-bottom: 2%;
-    font-size: 1.2rem;
-    height: 2.5rem;
+.hoperate{
+    width: 10%;
+    height: 4rem;
 }
 
 input[type=checkbox]{
-    width: 90%;
+    width: 80%;
     height: 2rem;
 }
 
-select{
-    color: #666;
+.fa-download{
+    margin: 0 2%;
+    background-color: #f3f8fe;
+    color: #83878f;
+}
+
+#hpage_box{
+    position: fixed;
+    bottom: 0;
+    width: 50%;
+    text-align: center;
+    margin-left: 25%;
+    margin-bottom: 2%;
+    font-size: 1.4rem;
+    height: 2.5rem;
+    color: #222;
 }

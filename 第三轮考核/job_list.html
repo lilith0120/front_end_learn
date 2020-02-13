@@ -7,12 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="css/job_list.css" rel="stylesheet" type="text/css">
     <link href="css/edit_job.css" rel="stylesheet" type="text/css">
+    <link href="css/job_detail.css" rel="stylesheet" type="text/css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!--外接CSS-->
     <title>JobList</title>
     <!--外接JS-->
     <script src="js/jquery.js"></script>
     <script src="js/job_list.js"></script>
+    <script src="js/edit_job.js"></script>
+    <script src="js/job_detail.js"></script>
 </head>
 
 <body>
@@ -23,7 +26,7 @@
     </div>
 
     <div id="job_table">
-        <table>
+        <table id="job">
             <tbody>
                 <tr>
                     <th class="id">考核id</th>
@@ -49,127 +52,21 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td class="id">02</td>
-                    <td class="name">考核作业</td>
-                    <td class="begin_time">2020/02/01</td>
-                    <td class="ddl">2020/03/01</td>
-                    <td class="state">进行中</td>
-                    <td class="num">30</td>
-                    <td class="operate">
-                        <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
-                        <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
-                        <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="id">03</td>
-                    <td class="name">考核作业</td>
-                    <td class="begin_time">2020/02/01</td>
-                    <td class="ddl">2020/03/01</td>
-                    <td class="state">进行中</td>
-                    <td class="num">30</td>
-                    <td class="operate">
-                        <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
-                        <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
-                        <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="id">02</td>
-                    <td class="name">考核作业</td>
-                    <td class="begin_time">2020/02/01</td>
-                    <td class="ddl">2020/03/01</td>
-                    <td class="state">进行中</td>
-                    <td class="num">30</td>
-                    <td class="operate">
-                        <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
-                        <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
-                        <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="id">02</td>
-                    <td class="name">yy</td>
-                    <td class="begin_time">2020/02/01</td>
-                    <td class="ddl">2020/03/01</td>
-                    <td class="state">进行中</td>
-                    <td class="num">300</td>
-                    <td class="operate">
-                        <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
-                        <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
-                        <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="id">02</td>
-                    <td class="name">考核作业</td>
-                    <td class="begin_time">2020/02/01</td>
-                    <td class="ddl">2020/03/01</td>
-                    <td class="state">进行中</td>
-                    <td class="num">30</td>
-                    <td class="operate">
-                        <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
-                        <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
-                        <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="id">02</td>
-                    <td class="name">考核作业</td>
-                    <td class="begin_time">2020/02/01</td>
-                    <td class="ddl">2020/03/01</td>
-                    <td class="state">进行中</td>
-                    <td class="num">30</td>
-                    <td class="operate">
-                        <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
-                        <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
-                        <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="id">02</td>
-                    <td class="name">考核作业</td>
-                    <td class="begin_time">2020/02/01</td>
-                    <td class="ddl">2020/03/01</td>
-                    <td class="state">进行中</td>
-                    <td class="num">30</td>
-                    <td class="operate">
-                        <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
-                        <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
-                        <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="id">02</td>
-                    <td class="name">作业</td>
-                    <td class="begin_time">2020/03/01</td>
-                    <td class="ddl">2020/03/01</td>
-                    <td class="state">进行中</td>
-                    <td class="num">1110</td>
-                    <td class="operate">
-                        <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
-                        <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
-                        <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
 
-    <div id="page_box">共 0 条</div>
+    <div id="page_box">
+        共 <span id="total_cnt">0</span> 条
+        <input type="button" id="pre_page" class="page_btn" value="上一页">
+        当前为第 <span id="page_num">1</span> 页
+        <input type="button" id="next_page" class="page_btn" value="下一页">
+    </div>
 </div>
 
 <div id="edit_job">
     <div id="back_title">
-        <i class="fa fa-arrow-left fa-lg fa-fw" id="back"></i>
+        <i class="fa fa-arrow-left fa-lg fa-fw back" id="eback"></i>
     </div>
 
     <form id="job_message" method="POST" target="no_show">
@@ -192,6 +89,81 @@
     </form>
 
     <iframe name="no_show"></iframe>
+</div>
+
+<div id="job_detail">
+    <div id="detail_title">
+        <i class="fa fa-arrow-left fa-lg fa-fw back" id="hback"></i>
+        <span id="delt">
+            批量删除
+        </span>
+    </div>
+
+    <div id="hjob_table">
+        <table id="hjob">
+            <tbody>
+                <tr>
+                    <th id="check"><input type="checkbox"></th>
+                    <th class="hnum">学号</th>
+                    <th class="hname">姓名</th>
+                    <th class="hup_time">提交时间</th>
+                    <th class="hstate">作业状态</th>
+                    <th class="hoperate">操作</th>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td class="hnum">111111111</td>
+                    <td class="hname">行露</td>
+                    <td class="hup_time">2020/01/19</td>
+                    <td class="hstate" title="双击修改状态">通过</td>
+                    <td class="hoperate">
+                        <i class="fa fa-download fa-lg fa-fw" title="下载"></i>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td class="hnum">111801429</td>
+                    <td class="hname">吴寒</td>
+                    <td class="hup_time">2020/01/20</td>
+                    <td class="hstate" title="双击修改状态">审核中</td>
+                    <td class="hoperate">
+                        <i class="fa fa-download fa-lg fa-fw" title="下载"></i>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td class="hnum">221801107</td>
+                    <td class="hname">大猫猫</td>
+                    <td class="hup_time">2020/08/11</td>
+                    <td class="hstate" title="双击修改状态">通过</td>
+                    <td class="hoperate">
+                        <i class="fa fa-download fa-lg fa-fw" title="下载"></i>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td class="hnum">111111111</td>
+                    <td class="hname">行露</td>
+                    <td class="hup_time">2020/01/19</td>
+                    <td class="hstate" title="双击修改状态">通过</td>
+                    <td class="hoperate">
+                        <i class="fa fa-download fa-lg fa-fw" title="下载"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="hpage_box">
+        共 <span id="htotal_cnt">0</span> 条
+        <input type="button" id="hpre_page" class="page_btn" value="上一页">
+        当前为第 <span id="hpage_num">1</span> 页
+        <input type="button" id="hnext_page" class="page_btn" value="下一页">
+    </div>
 </div>
 
 </body>

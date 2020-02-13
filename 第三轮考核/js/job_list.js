@@ -1,84 +1,118 @@
 
 $(function(){
 
-    // 编辑考核
-    let edit = $(".fa-edit");
-    edit.click(function(){
+    // 分页
+    $.ajax({
+        url: "/api/administrators/tasks",
+        type: "GET",
+        data: {},
+        dataType: 'json',
+        contentType: "application/json",
 
-        $('#job_list').fadeOut(function() {
-            $('#edit_job').fadeIn();
-        });
+        success: function(data) {
+            let page_num = $('#page_num').text();
+            let total_num = data.data.count;
+            $('#total_cnt').text(total_num);
+            let page_cnt = Math.ceil(total_num / 9);  //一页九条，总页数
 
-        let taskId = $(this).parent().parent().find('td').eq(0).text();
-        //console.log(taskId);
-        let url = `/api/administrators/tasks/${taskId}`;
-        $.ajax({
-            url: url,
-            type: "GET",
-            data: {},
-            dataType: 'json',
-            contentType: "application/json",
+            let da = new Date();
+            let y = da.getFullYear();
+            let m = (da.getMonth() + 1).toString().padStart(2, "0");
+            let d = da.getDate().toString().padStart(2, "0");
+            let time = y+"-"+m+"-"+d;
+            time = Date.parse(time);
 
-            success: function(data) {
-                $("input[name='job_name']").val(data.taskName);
-                $("input[name='job_deadline']").val(data.deadline);
-                $('#job_explain').val(data.taskContent);
-            }
-        });
+            let table = $('#job');
+            function page_show(cur_page, tot_page, tot) {
+                if(cur_page == tot_page) {
+                    for(let i = (cur_page - 1) * 9 + 1;i <= tot;i++) {
+                        let ddl = Date.parse(data.data.taskList[i].deadline);
+                        let text = "进行中";
+                        if(time - ddl > 0) {
+                            text = "结束";
+                        }
 
-        let job_btn = $("#job_btn");
-        job_btn.click(function(){
-
-            let taskId = $(this).parent().parent().find('td').eq(0).text();
-            let data = {
-                taskId: taskId,
-                taskName: $("input[name='job_name']").val(),
-                taskContent: $('#job_explain').val(),
-                deadline: $("input[name='job_deadline']").val(),
-            }
-
-            let json_data = JSON.stringify(data);
-            $.ajax({
-                url: "/api/administrators/tasks",
-                type: "PATCH",      //这里看看到时候会不会有问题
-                data: json_data,
-                dataType: 'json',
-                contentType: "application/json",
-
-                success: function(data) {
-                    if(data.info == "OK") {
-                        alert("修改完成");
-                    }
-                    else {
-                        console.log(data.info);
+                        let tr = 
+                        `<tr>
+                            <td class="id">${data.data.taskList[i].taskId}</td>
+                            <td class="name">${data.data.taskList[i].taskName}</td>
+                            <td class="begin_time">${data.data.taskList[i].startDate}</td>
+                            <td class="ddl">${data.data.taskList[i].deadline}</td>
+                            <td class="state">${text}</td>
+                            <td class="num">${data.data.taskList[i].number}</td>
+                            <td class="operate">
+                                <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
+                                <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
+                                <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
+                            </td>
+                        </tr>`
+                        table.append(tr);
                     }
                 }
+                else {
+                    for(let i = (cur_page - 1) * 9 + 1;i <= cur_page * 9;i++) {
+                        let ddl = Date.parse(data.data.taskList[i].deadline);
+                        let text = "进行中";
+                        if(time - ddl > 0) {
+                            text = "结束";
+                        }
+
+                        let tr = 
+                        `<tr>
+                            <td class="id">${data.data.taskList[i].taskId}</td>
+                            <td class="name">${data.data.taskList[i].taskName}</td>
+                            <td class="begin_time">${data.data.taskList[i].startDate}</td>
+                            <td class="ddl">${data.data.taskList[i].deadline}</td>
+                            <td class="state">${text}</td>
+                            <td class="num">${data.data.taskList[i].number}</td>
+                            <td class="operate">
+                                <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
+                                <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
+                                <i class="fa fa-trash-o fa-lg fa-fw" title="删除"></i>
+                            </td>
+                        </tr>`
+                        table.append(tr);
+                    }
+                }
+            }
+
+            page_show(page_num, page_cnt, total_num);
+            if(page_num == page_cnt) {
+                $('#pre_page').attr("disabled", true);
+                $('#next_page').attr("disabled", true);
+            }
+            else {
+                $('#pre_page').attr("disabled", true);
+            }
+            
+            $('#pre_page').click(function() {
+                if(page_num == 2) {
+                    $('#pre_page').attr("disabled", true);
+                    $('#next_page').attr("disabled", false);
+                }
+                else {
+                    $('#pre_page').attr("disabled", false);
+                    $('#next_page').attr("disabled", false);
+                }   
+                page_num--;
+                $('#page_num').text(page_num);
+                page_show(page_num, page_cnt, total_num);
             });
-        });
 
-        let da = new Date();
-        let y = da.getFullYear();
-        let m = (da.getMonth() + 1).toString().padStart(2, "0");
-        let d = da.getDate().toString().padStart(2, "0");
-        let job_ddl = $("input[name='job_deadline']");
-        job_ddl.attr("min", y+"-"+m+"-"+d);
-
-    });
-
-    let back = $(".fa-arrow-left");
-    back.click(function(){
-        $('#edit_job').fadeOut(function() {
-            $('#job_list').fadeIn();
-        });
-    });
-
-
-    // 考核详细页
-    let detail = $(".fa-info-circle");
-    detail.click(function(){
-
-        $(location).attr("href", "job_detail.html");
-
+            $('#next_page').click(function() {
+                if(page_num == page_cnt - 1) {
+                    $('#pre_page').attr("disabled", false);
+                    $('#next_page').attr("disabled", true);
+                }
+                else {
+                    $('#pre_page').attr("disabled", false);
+                    $('#next_page').attr("disabled", false);
+                }
+                page_num++;
+                $('#page_num').text(page_num);
+                page_show(page_num, page_cnt, total_num);
+            });
+        }
     });
 
 
