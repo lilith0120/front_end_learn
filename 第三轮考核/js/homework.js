@@ -3,7 +3,7 @@ $(function () {
 
     $('#submit_btn').click(function () {
 
-        if ($('#input_id').val == "") {
+        if ($('#input_id').val() == "") {
             return;
         }
 
@@ -16,13 +16,16 @@ $(function () {
             contentType: "application/json",
 
             success: function (data) {
-                if (data.status == 200) {
-                    $('#content_name').text(data.taskName);
-                    $('#content_explain_text').text(data.taskContent);
+                if (data.info == "OK") {
+                    $('#content_name').text(data.data.taskName);
+                    $('#content_explain_text').text(data.data.taskContent);
 
                     $('#login_id').fadeOut(function () {
                         $('#content').fadeIn();
                     });
+                }
+                else {
+                    alert(data.info);
                 }
             }
         });

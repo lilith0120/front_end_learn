@@ -2,8 +2,7 @@
 $(function() {
 
     // 编辑考核
-    let edit = $(".fa-edit");
-    edit.click(function(){
+    $(document).on('click', '.fa-edit', function(){
 
         $('#job_list').fadeOut(function() {
             $('#edit_job').fadeIn();
@@ -20,16 +19,16 @@ $(function() {
             contentType: "application/json",
 
             success: function(data) {
-                $("input[name='job_name']").val(data.taskName);
-                $("input[name='job_deadline']").val(data.deadline);
-                $('#job_explain').val(data.taskContent);
+                $("input[name='job_name']").val(data.data.taskName);
+                $("input[name='job_deadline']").val(data.data.deadline);
+                $('#job_explain').val(data.data.taskContent);
             }
         });
 
         let job_btn = $("#job_btn");
         job_btn.click(function(){
 
-            let taskId = $(this).parent().parent().find('td').eq(0).text();
+            //console.log(taskId);
             let data = {
                 taskId: taskId,
                 taskName: $("input[name='job_name']").val(),
@@ -70,6 +69,7 @@ $(function() {
     let back = $("#eback");
     back.click(function(){
         $('#edit_job').fadeOut(function() {
+            $('#job_list').load("job_list.html");
             $('#job_list').fadeIn();
         });
     });

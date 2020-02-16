@@ -1,6 +1,7 @@
 
 $(function(){
 
+    $("#job tr:not(:first)").remove(); 
     // 分页
     $.ajax({
         url: "/api/administrators/tasks",
@@ -25,8 +26,8 @@ $(function(){
             let table = $('#job');
             function page_show(cur_page, tot_page, tot) {
                 if(cur_page == tot_page) {
-                    for(let i = (cur_page - 1) * 9 + 1;i <= tot;i++) {
-                        let ddl = Date.parse(data.data.taskList[i].deadline);
+                    for(let i = (cur_page - 1) * 9;i <= tot - 1;i++) {
+                        let ddl = Date.parse(data.data.taskWithNumberList[i].deadline);
                         let text = "进行中";
                         if(time - ddl > 0) {
                             text = "结束";
@@ -34,12 +35,12 @@ $(function(){
 
                         let tr = 
                         `<tr>
-                            <td class="id">${data.data.taskList[i].taskId}</td>
-                            <td class="name">${data.data.taskList[i].taskName}</td>
-                            <td class="begin_time">${data.data.taskList[i].startDate}</td>
-                            <td class="ddl">${data.data.taskList[i].deadline}</td>
+                            <td class="id">${data.data.taskWithNumberList[i].taskId}</td>
+                            <td class="name">${data.data.taskWithNumberList[i].taskName}</td>
+                            <td class="begin_time">${data.data.taskWithNumberList[i].startDate}</td>
+                            <td class="ddl">${data.data.taskWithNumberList[i].deadline}</td>
                             <td class="state">${text}</td>
-                            <td class="num">${data.data.taskList[i].number}</td>
+                            <td class="num">${data.data.taskWithNumberList[i].number}</td>
                             <td class="operate">
                                 <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
                                 <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
@@ -50,8 +51,8 @@ $(function(){
                     }
                 }
                 else {
-                    for(let i = (cur_page - 1) * 9 + 1;i <= cur_page * 9;i++) {
-                        let ddl = Date.parse(data.data.taskList[i].deadline);
+                    for(let i = (cur_page - 1) * 9;i <= cur_page * 9 - 1;i++) {
+                        let ddl = Date.parse(data.data.taskWithNumberList[i].deadline);
                         let text = "进行中";
                         if(time - ddl > 0) {
                             text = "结束";
@@ -59,12 +60,12 @@ $(function(){
 
                         let tr = 
                         `<tr>
-                            <td class="id">${data.data.taskList[i].taskId}</td>
-                            <td class="name">${data.data.taskList[i].taskName}</td>
-                            <td class="begin_time">${data.data.taskList[i].startDate}</td>
-                            <td class="ddl">${data.data.taskList[i].deadline}</td>
+                            <td class="id">${data.data.taskWithNumberList[i].taskId}</td>
+                            <td class="name">${data.data.taskWithNumberList[i].taskName}</td>
+                            <td class="begin_time">${data.data.taskWithNumberList[i].startDate}</td>
+                            <td class="ddl">${data.data.taskWithNumberList[i].deadline}</td>
                             <td class="state">${text}</td>
-                            <td class="num">${data.data.taskList[i].number}</td>
+                            <td class="num">${data.data.taskWithNumberList[i].number}</td>
                             <td class="operate">
                                 <i class="fa fa-edit fa-lg fa-fw" title="编辑"></i>
                                 <i class="fa fa-info-circle fa-lg fa-fw" title="详细"></i>
@@ -96,6 +97,7 @@ $(function(){
                 }   
                 page_num--;
                 $('#page_num').text(page_num);
+                $("#job tr:not(:first)").remove(); 
                 page_show(page_num, page_cnt, total_num);
             });
 
@@ -110,6 +112,7 @@ $(function(){
                 }
                 page_num++;
                 $('#page_num').text(page_num);
+                $("#job tr:not(:first)").remove(); 
                 page_show(page_num, page_cnt, total_num);
             });
         }
@@ -117,8 +120,7 @@ $(function(){
 
 
     // 删除考核
-    let delt = $(".fa-trash-o");
-    delt.click(function(){
+    $(document).on('click', '.fa-trash-o', function(){
 
         let parent = $(this).parent().parent();
         let id = parent.find("td").eq(0).text();
@@ -135,10 +137,13 @@ $(function(){
             success: function(data) {
                 if(data.status == 200) {
                     console.log(data.info);
+                    let num = $('#total_cnt').text();
+                    $('#total_cnt').text(num-1);
+                    parent.remove();
+                    $("#job tr:not(:first)").remove();
+                    $('#job_list').load("job_list.html");
                 }
             }
         });
-        parent.remove();
-
     });
 });

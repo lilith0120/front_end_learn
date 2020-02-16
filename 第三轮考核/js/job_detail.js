@@ -2,8 +2,7 @@
 $(function(){
 
     // 考核详细页
-    let detail = $(".fa-info-circle");
-    detail.click(function(){
+    $(document).on('click', '.fa-info-circle', function(){
         $('#job_list').fadeOut(function() {
             $('#job_detail').fadeIn();
         });
@@ -38,7 +37,7 @@ $(function(){
                 let table = $('#hjob');
                 function page_show(cur_page, tot_page, tot) {
                     if(cur_page == tot_page) {
-                        for(let i = (cur_page - 1) * 9 + 1;i <= tot;i++) {
+                        for(let i = (cur_page - 1) * 9;i <= tot - 1;i++) {
                             let tr = 
                             `<tr>
                                 <td><input type="checkbox"></td>
@@ -50,12 +49,12 @@ $(function(){
                                 <td class="hoperate">
                                     <i class="fa fa-download fa-lg fa-fw" title="下载"></i>
                                 </td>
-                            </tr>`//看看后端能不能给我一个提交人数
+                            </tr>`
                             table.append(tr);
                         }
                     }
                     else {
-                        for(let i = (cur_page - 1) * 9 + 1;i <= cur_page * 9;i++) {
+                        for(let i = (cur_page - 1) * 9;i <= cur_page * 9 - 1;i++) {
                             let tr = 
                             `<tr>
                                 <td><input type="checkbox"></td>
@@ -92,6 +91,7 @@ $(function(){
                     }   
                     page_num--;
                     $('#hpage_num').text(page_num);
+                    $("#hjob tr:not(:first)").remove(); 
                     page_show(page_num, page_cnt, total_num);
                 });
     
@@ -106,6 +106,7 @@ $(function(){
                     }
                     page_num++;
                     $('#hpage_num').text(page_num);
+                    $("#hjob tr:not(:first)").remove(); 
                     page_show(page_num, page_cnt, total_num);
                 });
             }
@@ -167,14 +168,18 @@ $(function(){
 
                 success: function(data) {
                     console.log(data.info);
+                    let cnt = $('#htotal_cnt').text();
+                    $('#htotal_cnt').text(cnt-num);
+                    checked.parent().parent().remove();
+                    //$("#hjob tr:not(:first)").remove();
+                    //$('#job_list').load("job_list.html");
                 }
             });
-            checked.parent().parent().remove();
         });
 
 
         // 双击改变作业状态
-        $('.hstate').dblclick(function() {
+        $(document).on('dblclick', '.hstate', function() {
             let p = $(this);
             let select = 
             `<select>
@@ -232,7 +237,7 @@ $(function(){
 
 
         // 下载文件
-        $('.fa-download').click(function() {
+        $(document).on('click', '.fa-download', function() {
             let num = $(this).parent().parent().find('td').eq(1).text();
             let down_url = `/api/assignments/download/${taskId}/${num}`;
             
@@ -247,6 +252,8 @@ $(function(){
         back.click(function(){
             $('#job_detail').fadeOut(function() {
                 $('#job_list').fadeIn();
+                $('#job_list').load("job_list.html");
+                $("#hjob tr:not(:first)").remove(); 
             });
         });
     });

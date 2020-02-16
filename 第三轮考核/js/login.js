@@ -86,7 +86,7 @@ $(document).ready(function(){
         }
 
         let data = {
-            accountName: login_name.val(),
+            accountId: login_name.val(),
             passWord: login_pswd.val(),
         }
         //console.log(json_data);
@@ -117,26 +117,34 @@ $(document).ready(function(){
             return;
         }
 
+        let re_type = /^\d+$/;
+        if(!re_type.test(register_name.val())) {
+            alert("账号只能包含数字！");
+            return;
+        }
+
         let data = {
-            accountName: register_name.val(),
+            accountId: register_name.val(),
             passWord: pswd.val(),
         }
         //console.log(json_data);
     
         let json_data = JSON.stringify(data);
         $.ajax({
-            url: "/api/users",
+            url: "/api/users/students",
             type: "POST",
             data: json_data,
             dataType: 'json',
             contentType: "application/json",
 
             success: function(data) {
-                if(data.status == 200) {
+                if(data.info == "OK") {
                     $(location).attr("href", "back.html");//跳转到后台
+                }
+                else {
+                    alert(data.info);
                 }
             }
         });
-        //这里后端还在开发中，待定
     });
 });
