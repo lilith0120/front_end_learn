@@ -1,0 +1,107 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+html{
+    height: 100%;
+    font-size: 62.5%;
+    background-color: #e5f8f8;
+}
+
+#header{
+    margin-top: 2%;
+    text-align: center;
+
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 1rem;
+
+    color: #35495e;
+}
+
+#new_list{
+    margin-top: 4%;
+    text-align: center;
+}
+
+#text{
+    width: 25%;
+    height: 3rem;
+
+    text-indent: 2rem;
+    font-size: 1.6rem;
+    
+    background-color: #e5f8f8;
+    border: 1px #35495e solid;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+#add{
+    margin-left: 2%;
+    width: 5%;
+    height: 3rem;
+
+    color: #e5f8f8;
+    border: 1px #35495e solid;
+    background-color: #35495e;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+#add:hover{
+    color: #35495e;
+    background-color: #e5f8f8;
+}
+
+#item_list{
+    width: 45%;
+    height: 30rem;
+    margin: 3% auto;
+    padding: 1%;
+
+    
+    font-weight: bold;
+    
+
+    border: 1px #35495e solid;
+}
+
+#item_list a{
+    font-size: 1.3rem;
+    color: #35495e;
+}
+
+.uk-accordion-content{
+    height: 22rem;
+
+    border: 1px #35495e solid;
+}
+
+#doing_num, #done_num{
+    margin-left: 2%;
+}
+
+.d_item{
+    height: 21rem;
+
+    font-size: 1.4rem;
+    overflow-y: auto;
+}
+
+.d_item li{
+    margin: 1% 0;
+    word-wrap: break-word;
+}
+
+.d_item li:hover{
+    box-shadow: 0rem 0rem 0.1rem #a2aeb9;
+}
+
+.icon{
+    float: right;
+    margin: 0 1%;
+}

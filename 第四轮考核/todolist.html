@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.2/dist/css/uikit.min.css" />
+    <link href="todolist.css" rel="stylesheet" type="text/css">
+    <script src="vue.js"></script>
+    <script src="jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.2/dist/js/uikit.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.2/dist/js/uikit-icons.min.js"></script>
+</head>
+<body>
+    <div id="header">
+        ToDoList
+    </div>
+    
+    <div id="item">
+        <div id="new_list">
+            <input type="text" id="text" v-model="newItem" @keyup.enter="add_item" placeholder="Please add something.">
+            <button type="button" id="add" @click="add_item">Add</button>
+        </div>
+
+        <div id="item_list">
+            <ul uk-accordion="collapsible: false">
+                <!-- 待办事项 -->
+                <li class="uk-open">
+                    <a class="uk-accordion-title" href="javascript:;">
+                        Doing-Item
+                        <span id="doing_num">{{doingNum}}</span>
+                    </a>
+
+                    <div class="uk-accordion-content">
+                        <ul class="d_item">
+                            <!-- 添加待办事项 -->
+                            <li title="双击编辑事项" 
+                                v-for="(item, index) in doingItems" 
+                                :key="item.id" 
+                                @dblclick="edit_item(item)">
+                                {{item.message}}
+                                <input type="text" 
+                                    id="change_text"
+                                    v-model="editItem" 
+                                    v-show="item.isEdit"
+                                    autofocus="autofocus"
+                                    @blur="edit_end(item)">
+                                <span uk-icon="icon: trash" class="icon" title="删除" 
+                                    @click="delete_item(item.done, index)"></span>
+                                <span uk-icon="icon: check" class="icon" title="完成" 
+                                    @click="finish_item(item.message, index)"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- 已完成事项 -->
+                <li>
+                    <a class="uk-accordion-title" href="javascript:;">
+                        Done-Item
+                        <span id="done_num">&nbsp;{{doneNum}}</span>
+                    </a>
+
+                    <div class="uk-accordion-content">
+                        <ul class="d_item">
+                            <!-- 添加已完成事项 -->
+                            <li v-for="(item, index) in doneItems" :key="item.id">
+                                {{item.message}}
+                                <span uk-icon="icon: trash" class="icon" title="删除" 
+                                    @click="delete_item(item.done, index)"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="todolist.js"></script>
+</body>
+</html>
