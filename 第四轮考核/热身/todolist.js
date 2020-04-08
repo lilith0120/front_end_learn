@@ -5,8 +5,8 @@ var vm = new Vue({
         doingNum: window.localStorage.getItem('doing_num') || 0,
         doneNum: window.localStorage.getItem('done_num') || 0,
         newItem: '',
-        doingItems: JSON.parse(window.localStorage.getItem('doing_key') || '[]'),
-        doneItems: JSON.parse(window.localStorage.getItem('done_key') || '[]'),
+        doingItems: JSON.parse(window.localStorage.getItem('doing_key')) || [],
+        doneItems: JSON.parse(window.localStorage.getItem('done_key')) || [],
         editItem: '',
         preMessage: '',
     },
@@ -41,6 +41,8 @@ var vm = new Vue({
                 window.localStorage.setItem('done_num', newValue);
             }
         },
+
+
     },
 
     methods: {
