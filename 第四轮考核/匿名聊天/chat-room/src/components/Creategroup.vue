@@ -7,6 +7,7 @@
         placeholder="Search for messages or users..."
         suffix-icon="el-icon-search"
         v-model="search_input"
+        clearable
       ></el-input>
     </div>
 
@@ -30,7 +31,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item class="form_item" label="Name">
-          <el-input class="form_input" placeholder="Group Name" v-model="form_name"></el-input>
+          <el-input class="form_input" placeholder="Group Name" v-model="form_name" clearable></el-input>
         </el-form-item>
         <el-form-item class="form_item" label="Topic(optional)">
           <el-input
@@ -39,6 +40,7 @@
             v-model="form_topic"
             maxlength="10"
             show-word-limit
+            clearable
           ></el-input>
         </el-form-item>
         <el-form-item class="form_item" label="Description">
@@ -48,6 +50,7 @@
             v-model="form_description"
             maxlength="30"
             show-word-limit
+            clearable
           ></el-input>
         </el-form-item>
         <el-form-item>

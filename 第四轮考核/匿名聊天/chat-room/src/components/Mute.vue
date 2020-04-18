@@ -32,7 +32,7 @@
             </el-upload>
           </el-form-item>
           <el-form-item class="form_item" label="Name">
-            <el-input class="form_input" placeholder="Group Name" v-model="form_name"></el-input>
+            <el-input class="form_input" placeholder="Group Name" v-model="form_name" clearable></el-input>
           </el-form-item>
           <el-form-item class="form_item" label="Topic(optional)">
             <el-input
@@ -41,6 +41,7 @@
               v-model="form_topic"
               maxlength="10"
               show-word-limit
+              clearable
             ></el-input>
           </el-form-item>
           <el-form-item class="form_item" label="Description">
@@ -50,6 +51,7 @@
               v-model="form_description"
               maxlength="30"
               show-word-limit
+              clearable
             ></el-input>
           </el-form-item>
           <el-form-item>
@@ -72,9 +74,9 @@ export default {
         "https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png",
       group_name: "NULL",
       group_description: "NULL",
-      form_name: '',
-      form_topic: '',
-      form_description: '',
+      form_name: "",
+      form_topic: "",
+      form_description: ""
     };
   },
 
@@ -149,7 +151,7 @@ export default {
   background-color: #edeef6;
 }
 
-#main{
+#main {
   background-color: #f5f6fa;
   height: 40rem;
 }
@@ -171,7 +173,7 @@ export default {
 }
 
 .el-button--primary {
-  width: 100%; 
+  width: 100%;
   margin-top: 2%;
   height: 3rem;
   background-color: #0176ff;
@@ -193,7 +195,7 @@ export default {
   width: 24.2rem;
 }
 
-.upload >>> .el-upload-list__item{
+.upload >>> .el-upload-list__item {
   font-size: 1rem;
 }
 </style>

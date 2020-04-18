@@ -8,6 +8,7 @@
         placeholder="Search for messages or users..."
         suffix-icon="el-icon-search"
         v-model="search_input"
+        clearable
       ></el-input>
     </div>
 

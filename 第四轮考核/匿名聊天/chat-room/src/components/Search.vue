@@ -6,6 +6,7 @@
         placeholder="Search this chat"
         suffix-icon="el-icon-search"
         v-model="searchInput"
+        clearable
       ></el-input>
     </div>
   </div>

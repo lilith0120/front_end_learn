@@ -36,13 +36,18 @@
             </el-upload>
           </el-form-item>
           <el-form-item class="form_item" label="Name">
-            <el-input class="form_input" placeholder="Type your name" v-model="form_name"></el-input>
+            <el-input class="form_input" placeholder="Type your name" v-model="form_name" clearable></el-input>
           </el-form-item>
           <el-form-item class="form_item" label="Phone">
-            <el-input class="form_input" placeholder="(123)456-7890" v-model="form_phone"></el-input>
+            <el-input class="form_input" placeholder="(123)456-7890" v-model="form_phone" clearable></el-input>
           </el-form-item>
           <el-form-item class="form_item" label="Email">
-            <el-input class="form_input" placeholder="you@yoursite.com" v-model="form_email"></el-input>
+            <el-input
+              class="form_input"
+              placeholder="you@yoursite.com"
+              v-model="form_email"
+              clearable
+            ></el-input>
           </el-form-item>
           <el-form-item>
             <div id="button">
