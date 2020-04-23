@@ -17,9 +17,11 @@
           <el-upload
             class="upload"
             name="photo"
+            ref="photo"
             drag
-            action="#"
+            action="action_url"
             accept="image/*"
+            :on-change="upload_photo"
             :auto-upload="false"
             :limit="1"
           >
@@ -55,7 +57,7 @@
         </el-form-item>
         <el-form-item>
           <div id="button">
-            <el-button type="primary">Create group</el-button>
+            <el-button type="primary" @click.native="create_group">Create group</el-button>
           </div>
         </el-form-item>
       </el-form>
@@ -68,11 +70,83 @@ export default {
   data() {
     return {
       search_input: "",
+      action_url: "http://127.0.0.1:5000/chat/newRoom/",
+      form_photo: [],
       form_name: "",
       form_topic: "",
       form_description: ""
     };
-  }
+  },
+
+  methods: {
+    create_group() {
+
+      // let id = 1;
+      // console.log(id);
+      // this.$router.push({
+      //   "path": "/roomId",
+      //   "query":{
+      //     "id": id
+      //   }
+      // })
+      // if(this.form_name == "") {
+      //   this.$notify({
+      //     title: 'Warning',
+      //     message: 'Please input name!',
+      //     type: 'warning',
+      //     duration: 2000,
+      //     showClose: false
+      //   });
+      //   return;
+      // }
+
+      // if(this.form_description == "") {
+      //   this.$notify({
+      //     title: 'Warning',
+      //     message: 'Please input description!',
+      //     type: 'warning',
+      //     duration: 2000,
+      //     showClose: false
+      //   });
+      //   return;
+      // }
+
+      // if(this.form_photo.length == 0) {
+      //   this.$notify({
+      //     title: 'Warning',
+      //     message: 'Please select photo!',
+      //     type: 'warning',
+      //     duration: 2000,
+      //     showClose: false
+      //   });
+      //   return;
+      // }
+
+      // this.$refs.photo.submit();
+
+      // let data = {
+      //   gName: this.form_name,
+      //   gTopic: this.form_topic,
+      //   gDescription: this.form_description,
+      // }// 到时候问一下要不要传cookie
+
+      // this.$axios({
+      //   method: 'post',
+      //   url: 'http://127.0.0.1:5000/chat/newRoom/',
+      //   data: data,
+      // })
+      // .then((res) => {
+      //   console.log(res);
+      //   // 返回给我一个房间id，然后我要跳转到该房间
+      // })
+
+    },
+
+    upload_photo(file) {
+      this.form_photo = [],
+      this.form_photo.push(file.raw);
+    }
+  },
 };
 </script>
 

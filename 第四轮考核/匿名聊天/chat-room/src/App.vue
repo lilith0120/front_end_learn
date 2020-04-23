@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <sidebar @show_id="show_id"></sidebar>
+
     <template v-if="state === 1">
       <creategroup></creategroup>
     </template>
@@ -22,7 +23,6 @@
 
     <template v-else>
       <profile></profile>
-      <settings></settings>
     </template>
   </div>
 </template>
@@ -30,11 +30,10 @@
 <script>
 import sidebar from "./components/Sidebar";
 import creategroup from "./components/Creategroup";
-import chatpage from "./components/Chatpage";
-import mute from "./components/Mute";
-import share from "./components/Share";
-import profile from "./components/Profile";
-import settings from "./components/Settings";
+import chatpage from "./components/chat_page/Chatpage";
+import mute from "./components/chat_page/Mute";
+import share from "./components/chat_page/Share";
+import profile from "./components/person_page/Profile";
 
 export default {
   name: "App",
@@ -45,14 +44,13 @@ export default {
     mute,
     share,
     profile,
-    settings
   },
 
   data() {
     return {
       state: 3,
       isMute: false,
-      isShare: false
+      isShare: false,
     };
   },
 
