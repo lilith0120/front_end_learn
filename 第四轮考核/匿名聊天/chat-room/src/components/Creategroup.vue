@@ -80,73 +80,75 @@ export default {
 
   methods: {
     create_group() {
-
-      // let id = 1;
-      // console.log(id);
       // this.$router.push({
-      //   "path": "/roomId",
-      //   "query":{
-      //     "id": id
-      //   }
+      //   path: `/roomId/1`,
       // })
-      // if(this.form_name == "") {
-      //   this.$notify({
-      //     title: 'Warning',
-      //     message: 'Please input name!',
-      //     type: 'warning',
-      //     duration: 2000,
-      //     showClose: false
-      //   });
-      //   return;
-      // }
+      // this.$router.go(0);  // 测试数据
+      if (this.form_name == "") {
+        this.$notify({
+          title: "Warning",
+          message: "Please input name!",
+          type: "warning",
+          duration: 2000,
+          showClose: false
+        });
+        return;
+      }
 
-      // if(this.form_description == "") {
-      //   this.$notify({
-      //     title: 'Warning',
-      //     message: 'Please input description!',
-      //     type: 'warning',
-      //     duration: 2000,
-      //     showClose: false
-      //   });
-      //   return;
-      // }
+      if (this.form_description == "") {
+        this.$notify({
+          title: "Warning",
+          message: "Please input description!",
+          type: "warning",
+          duration: 2000,
+          showClose: false
+        });
+        return;
+      }
 
-      // if(this.form_photo.length == 0) {
-      //   this.$notify({
-      //     title: 'Warning',
-      //     message: 'Please select photo!',
-      //     type: 'warning',
-      //     duration: 2000,
-      //     showClose: false
-      //   });
-      //   return;
-      // }
+      if (this.form_photo.length == 0) {
+        this.$notify({
+          title: "Warning",
+          message: "Please select photo!",
+          type: "warning",
+          duration: 2000,
+          showClose: false
+        });
+        return;
+      }
 
-      // this.$refs.photo.submit();
+      this.$refs.photo.submit();
 
-      // let data = {
-      //   gName: this.form_name,
-      //   gTopic: this.form_topic,
-      //   gDescription: this.form_description,
-      // }// 到时候问一下要不要传cookie
+      let data = {
+        gName: this.form_name,
+        gTopic: this.form_topic,
+        gDescription: this.form_description
+      }; // 到时候问一下要不要传cookie
 
-      // this.$axios({
-      //   method: 'post',
-      //   url: 'http://127.0.0.1:5000/chat/newRoom/',
-      //   data: data,
-      // })
-      // .then((res) => {
-      //   console.log(res);
-      //   // 返回给我一个房间id，然后我要跳转到该房间
-      // })
-
+      this.$axios({
+        method: "post",
+        url: "", // 等后端的接口
+        data: data
+      }).then(res => {
+        let url = `${window.location.origin}/#/roomId/${res.roomId}`;
+        this.$alert(`创建房间成功，房间链接为${url}`, "提示", {
+          confirmButtonText: "确定",
+          type: "success",
+          callback: () => {
+            console.log(res);
+            this.$router.push({
+              path: `/roomId/${res.roomId}`
+            });
+            this.$router.go(0);
+          }
+        });
+      });
     },
 
     upload_photo(file) {
-      this.form_photo = [],
-      this.form_photo.push(file.raw);
+      (this.form_photo = []), this.form_photo.push(file.raw);
     }
-  },
+  }
 };
 </script>
 

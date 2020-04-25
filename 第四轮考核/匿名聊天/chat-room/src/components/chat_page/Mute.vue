@@ -56,7 +56,7 @@
           </el-form-item>
           <el-form-item>
             <div id="button">
-              <el-button type="primary"></el-button>
+              <el-button type="primary" @click.native="change_message"></el-button>
             </div>
           </el-form-item>
         </el-form>
@@ -80,10 +80,33 @@ export default {
     };
   },
 
+  // created() {
+  //   this.$axios({
+  //     method: '',
+  //     url: '',  // 从后端获取房间信息
+  //   })
+  //   .then((res) => {
+  //     console.log(res);
+
+  //   })
+  // },
+
   methods: {
     hide_mute() {
       this.isMute = false;
       this.$emit("hide_mute", this.isMute);
+    },
+
+    change_message() {
+      this.$axios({
+        method: '',
+        url: '',  // 将修改信息传给后端
+      })
+      .then((res) => {
+        console.log(res);
+        this.group_name = this.form_name;
+        this.group_description = this.form_description;
+      })
     }
   }
 };

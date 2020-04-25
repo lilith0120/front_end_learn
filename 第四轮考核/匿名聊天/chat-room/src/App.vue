@@ -3,16 +3,17 @@
     <sidebar @show_id="show_id"></sidebar>
 
     <template v-if="state === 1">
-      <creategroup></creategroup>
+      <router-view name="creategroup"></router-view>
     </template>
 
     <template v-else-if="state === 2">
-      <chatpage
+      <router-view
+        name="chatpage"
         @show_mute="show_mute"
         @show_share="show_share"
         :hideMute="isMute"
         :hideShare="isShare"
-      ></chatpage>
+      ></router-view>
       <template v-if="isMute === true">
         <mute @hide_mute="hide_mute"></mute>
       </template>
@@ -22,35 +23,29 @@
     </template>
 
     <template v-else>
-      <profile></profile>
+      <router-view></router-view>
     </template>
   </div>
 </template>
 
 <script>
 import sidebar from "./components/Sidebar";
-import creategroup from "./components/Creategroup";
-import chatpage from "./components/chat_page/Chatpage";
 import mute from "./components/chat_page/Mute";
 import share from "./components/chat_page/Share";
-import profile from "./components/person_page/Profile";
 
 export default {
   name: "App",
   components: {
     sidebar,
-    creategroup,
-    chatpage,
     mute,
-    share,
-    profile,
+    share
   },
 
   data() {
     return {
       state: 3,
       isMute: false,
-      isShare: false,
+      isShare: false
     };
   },
 

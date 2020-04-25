@@ -66,7 +66,7 @@
 export default {
   data() {
     return {
-      action_url: "http://127.0.0.1:5000/chat/addUser",
+      action_url: "", // 等后端的接口
       form_avatar: [],
       form_name: "",
       form_phone: "",
@@ -114,7 +114,7 @@ export default {
       if (document.cookie == "") {
         this.$axios({
           method: "get",
-          url: "http://127.0.0.1:5000/chat/addUser",
+          url: "", // 等后端的接口，这个是第一次访问该页面
           data: data
         }).then(res => {
           console.log(res.info);
@@ -130,11 +130,25 @@ export default {
           this.$emit("change_email", this.form_email);
           this.$emit("change_avatar", this.form_avatar);
         });
-      }
-      else {
+      } else {
         this.$axios({
-          
-        })
+          method: "",
+          url: "",  // 等后端的接口,修改用户信息
+          data: data
+        }).then(res => {
+          console.log(res);
+          this.$notify({
+            title: "Success",
+            message: "Succeed to save preferences",
+            type: "success",
+            duration: 2000,
+            showClose: false
+          });
+          this.$emit("change_name", this.form_name);
+          this.$emit("change_phone", this.form_phone);
+          this.$emit("change_email", this.form_email);
+          this.$emit("change_avatar", this.form_avatar);
+        });
       }
     },
 

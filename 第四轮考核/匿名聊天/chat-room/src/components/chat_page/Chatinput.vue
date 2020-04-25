@@ -1,10 +1,10 @@
 <template>
   <div id="Chatinput">
     <div id="chat_message">
-      <VueEmoji class="emoji" ref="emoji" @input="chat_input" width="200px"/>
+      <VueEmoji class="emoji" ref="emoji" @input="chat_input" width="200px" />
     </div>
     <div id="chat_button">
-      <el-button type="primary" icon="el-icon-s-promotion" circle></el-button>
+      <el-button type="primary" icon="el-icon-s-promotion" @click.native="input_message" circle></el-button>
     </div>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default {
   methods: {
     chat_input(event) {
       this.chat_content = event.data;
+    },
+
+    input_message() {
+      this.$axios({})  // 将聊天内容传给后端
     }
   }
 };
@@ -60,12 +64,12 @@ export default {
   font-size: 1.4rem;
 }
 
-.emoji >>> .emoji-wysiwyg-editor{
+.emoji >>> .emoji-wysiwyg-editor {
   border: none;
   height: 6rem !important;
 }
 
-.emoji >>> i.emoji-picker-icon.emoji-picker{
+.emoji >>> i.emoji-picker-icon.emoji-picker {
   margin-top: 1%;
 }
 </style>

@@ -32,7 +32,7 @@ export default {
     return {
       isMute: false,
       isShare: false,
-      isSearch: false
+      isSearch: false,
     };
   },
 

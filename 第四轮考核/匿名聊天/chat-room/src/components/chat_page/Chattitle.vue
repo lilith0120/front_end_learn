@@ -9,9 +9,7 @@
         <p id="name">{{group_name}}</p>
         <p id="tips">
           {{group_num}} members
-          <template v-if="group_topic !== ''">
-             · {{group_topic}}
-          </template>
+          <template v-if="group_topic !== ''">· {{group_topic}}</template>
         </p>
       </div>
     </div>
@@ -21,13 +19,15 @@
         <el-button icon="el-icon-search" @click.native="search_toggle" plain></el-button>
         <el-button icon="el-icon-share" @click.native="show_share" plain></el-button>
         <el-dropdown trigger="click">
-          <el-button icon="el-icon-more" plain></el-button>
+          <el-button icon="el-icon-more" plain :disabled='isOwner'></el-button>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="show_mute">
-              Mute<i class="el-icon-s-operation"></i>
+              Mute
+              <i class="el-icon-s-operation"></i>
             </el-dropdown-item>
-            <el-dropdown-item>
-              Delete<i class="el-icon-delete"></i>
+            <el-dropdown-item @click.native="delete_room">
+              Delete
+              <i class="el-icon-delete"></i>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -43,12 +43,33 @@ export default {
       isMute: false,
       isShare: false,
       isSearch: false,
-      photo_url: 'https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png',
-      group_name: 'NULL',
+      isOwner: false,  // 判断是不是房主
+      photo_url:
+        "https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png",
+      group_name: "NULL",
       group_num: 0,
-      group_topic: '',
+      group_topic: "",
+      room_id: this.$route.params.id
     };
   },
+
+  // created() {
+  //   this.$axios({
+  //     method: '',
+  //     url: '',  // 从这里得到后端传来的房间信息
+  //   })
+  //   .then((res) => {
+  //     console.log(res);
+  //     if(document.cookie == res.cookie) {
+  //       this.isOwner = false;
+  //     }
+  //     else {
+  //       this.isOwner = true;
+  //     }
+
+  //     // 从这里得到后端传来的房间信息
+  //   })
+  // },
 
   methods: {
     // 显示群信息修改页面
@@ -67,6 +88,35 @@ export default {
     search_toggle() {
       this.isSearch = !this.isSearch;
       this.$emit("search_toggle", this.isSearch);
+    },
+
+    // 删除房间
+    delete_room() {
+      this.$confirm("是否永久删除该房间?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$axios({
+            method: "delete",
+            url: ""  // 删除房间
+          }).then(res => {
+            console.log(res);
+            this.$router.push("/");
+            this.$router.go(0);
+            this.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     }
   }
 };
@@ -82,22 +132,22 @@ export default {
   box-sizing: border-box;
 }
 
-#message{
+#message {
   display: flex;
   align-items: center;
   margin-left: 5.5%;
   width: 30%;
 }
 
-#group_message{
+#group_message {
   margin-left: 3.5%;
 }
 
-#name{
+#name {
   font-weight: bold;
 }
 
-#tips{
+#tips {
   margin-top: 2%;
   color: #9fa0aa;
 }
@@ -113,11 +163,11 @@ export default {
 }
 
 .el-icon-s-operation {
-  margin-left: 37%;
+  margin-left: 35%;
 }
 
 .el-icon-delete {
-  margin-left: 28%;
+  margin-left: 26%;
 }
 
 .el-dropdown-menu {

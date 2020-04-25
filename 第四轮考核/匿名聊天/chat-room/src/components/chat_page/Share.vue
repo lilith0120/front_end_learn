@@ -47,6 +47,16 @@ export default {
     };
   },
 
+  // created() {
+  //   this.$axios({
+  //     method: '',
+  //     url: '',  // 从后端得到房间的信息
+  //   })
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  // },
+
   methods: {
     hide_share() {
       this.isShare = false;

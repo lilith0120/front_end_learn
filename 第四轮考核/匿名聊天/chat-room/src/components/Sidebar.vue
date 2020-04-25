@@ -7,7 +7,7 @@
           <el-menu-item index="1" @click="show_id(1)">
             <i class="el-icon-edit-outline"></i>
           </el-menu-item>
-          <el-menu-item index="2" @click="show_id(2)">
+          <el-menu-item index="2" @click="show_id(2)" :disabled="have_room">
             <i class="el-icon-chat-square"></i>
           </el-menu-item>
           <el-menu-item index="3" @click="show_id(3)">
@@ -26,8 +26,18 @@
 export default {
   data() {
     return {
-      id: 3
+      id: 3,
+      have_room: false,
     };
+  },
+
+  created() {
+    let hash = window.location.hash.split("/");
+    let room_id = hash[hash.length - 1];
+    // console.log(room_id);
+    if (room_id == "") {
+      this.have_room = true;
+    }
   },
 
   methods: {
