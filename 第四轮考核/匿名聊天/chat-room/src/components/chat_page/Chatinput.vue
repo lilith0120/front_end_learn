@@ -1,7 +1,7 @@
 <template>
   <div id="Chatinput">
     <div id="chat_message">
-      <VueEmoji class="emoji" ref="emoji" @input="chat_input" width="200px" />
+      <VueEmoji v-if="isReload" class="emoji" ref="emoji" @input="chat_input" width="200px" />
     </div>
     <div id="chat_button">
       <el-button type="primary" icon="el-icon-s-promotion" @click.native="input_message" circle></el-button>
@@ -19,7 +19,8 @@ export default {
 
   data() {
     return {
-      chat_content: ""
+      chat_content: "",
+      isReload: true,
     };
   },
 
@@ -29,7 +30,12 @@ export default {
     },
 
     input_message() {
-      this.$axios({})  // 将聊天内容传给后端
+      this.$emit('input_message', this.chat_content);
+      this.isReload = false;
+      setTimeout(() => {
+        this.isReload = true;
+      }, 1);
+      // this.$axios({})  // 将聊天内容传给后端
     }
   }
 };

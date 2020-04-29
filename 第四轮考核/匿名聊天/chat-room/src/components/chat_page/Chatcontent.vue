@@ -1,6 +1,6 @@
 <template>
   <div id="Chatcontent" ref="Chatcontent">
-    <div id="content" ref="content" v-infinite-scroll="load">
+    <div id="content" ref="content" ><!--v-infinite-scroll="load"-->
       <div v-for="(item, index) in items" :key="index">
         <template v-if="item.isOwn">
           <div class="my">
@@ -20,19 +20,63 @@
         </template>
       </div>
     </div>
+
+    <chatinput @input_message='input_message'></chatinput>
   </div>
 </template>
 
 <script>
+
+import chatinput from "./Chatinput";
+
 export default {
+  components: {
+    chatinput,
+  },
+
   data() {
     return {
       counts: 1,
       items: [],
+      avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
     };
   },
 
   props: ["hideSearch"],
+
+  sockets: {
+    connect() {
+      console.log('连接成功！');
+    },
+
+    // 监听在线人数
+    user(data) {
+      console.log('在线人数', data);
+    },
+
+    // 接受其他人的信息
+    receive_message(data) {
+      this.items.push(data);
+    }
+  },
+
+  updated() {
+    this.$refs.content.scrollTop = this.$refs.content.scrollHeight;
+  },
+
+  created() {
+    this.$axios({
+      method: '',
+      url: '',  // 获取用户的头像信息
+    })
+    .then((res) => {
+      console.log(res);
+    })
+  },
+
+  mounted() {
+    this.$socket.emit('connect', 1);
+  },
 
   watch: {
     // 搜索栏的出现和隐藏
@@ -48,20 +92,32 @@ export default {
   },
 
   methods: {
-    load() {
-      for (let i = 0; i < 10; i++) {
-        let my = true;
-        if(i % 2 == 0){
-          my = !my;
-        }
-        this.items.push({
-          message: '大猫猫~',
-          avatar_url:
-            "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-          isOwn: my
-        });
-      }
-    }
+    // load() {
+    //   for (let i = 0; i < 10; i++) {
+    //     let my = true;
+    //     if(i % 2 == 0){
+    //       my = !my;
+    //     }
+    //     this.items.push({
+    //       message: '大猫猫~',
+    //       avatar_url:
+    //         "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+    //       isOwn: my
+    //     });
+    //   }
+    // },
+
+    input_message(message) {
+      this.$socket.emit('send_group_message', {
+        message: message,
+        avatar_url: this.avatar,
+      });
+      this.items.push({
+        message: message,
+        avatar_url: this.avatar,
+        isOwn: true,
+      })
+    },
   }
 };
 </script>

@@ -78,24 +78,19 @@ export default {
     };
   },
 
-  // created: {
-  //   function() {
-  //     // 非第一次使用聊天室，修改信息
-  //     if (document.cookie != "") {
-  //       this.$axios({
-  //         method: "get",
-  //         url: "",
-  //       })
-  //       .then((res) => {
-  //         console.log(res);
-  //         // this.user_name = res.uName;
-  //         // this.form_phone = res.uPhone;
-  //         // this.form_email = res.uEmail;
-  //         // this.avatar_url = res.uAvatar;
-  //       })
-  //     }
-  //   }
-  // },
+  created() {
+        this.$axios({
+          method: "get",
+          url: "/chat/getUser",
+        })
+        .then((res) => {
+          console.log(res.status);
+          this.user_name = res.uName;
+          this.form_phone = res.uPhone;
+          this.form_email = res.uEmail;
+          // this.avatar_url = res.uAvatar;
+        })
+  },
 
   methods: {
     change_name(name) {

@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       search_input: "",
-      action_url: "http://127.0.0.1:5000/chat/newRoom/",
+      action_url: "/chat/createGroup",
       form_photo: [],
       form_name: "",
       form_topic: "",
@@ -123,25 +123,35 @@ export default {
         gName: this.form_name,
         gTopic: this.form_topic,
         gDescription: this.form_description
-      }; // 到时候问一下要不要传cookie
+      };
 
       this.$axios({
         method: "post",
-        url: "", // 等后端的接口
+        url: "/chat/createGroup", // 等后端的接口
         data: data
       }).then(res => {
-        let url = `${window.location.origin}/#/roomId/${res.roomId}`;
-        this.$alert(`创建房间成功，房间链接为${url}`, "提示", {
-          confirmButtonText: "确定",
-          type: "success",
-          callback: () => {
-            console.log(res);
-            this.$router.push({
-              path: `/roomId/${res.roomId}`
-            });
-            this.$router.go(0);
-          }
-        });
+        if (res.status == "error") {
+          this.$notify({
+            title: "Warning",
+            message: "该房间名已存在!",
+            type: "warning",
+            duration: 2000,
+            showClose: false
+          });
+        } else {
+          let url = `${window.location.origin}/#/roomId/${res.roomId}`;
+          this.$alert(`创建房间成功，房间链接为${url}`, "提示", {
+            confirmButtonText: "确定",
+            type: "success",
+            callback: () => {
+              console.log(res.roomId);
+              this.$router.push({
+                path: `/roomId/${res.roomId}`
+              });
+              this.$router.go(0);
+            }
+          });
+        }
       });
     },
 

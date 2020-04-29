@@ -47,15 +47,18 @@ export default {
     };
   },
 
-  // created() {
-  //   this.$axios({
-  //     method: '',
-  //     url: '',  // 从后端得到房间的信息
-  //   })
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  // },
+  created() {
+    this.$axios({
+      method: 'get',
+      url: '/chat/getRoom',  // 从后端得到房间的信息(给后端房间号)
+    })
+    .then((res) => {
+      console.log(res.status);
+      this.group_name = res.gName;
+      this.group_url = window.location.href;
+      this.group_description = res.gDescription;
+    })
+  },
 
   methods: {
     hide_share() {

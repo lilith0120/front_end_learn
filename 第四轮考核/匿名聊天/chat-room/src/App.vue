@@ -49,6 +49,18 @@ export default {
     };
   },
 
+  created() {
+    if(document.cookie == "") {
+      this.$axios({
+        method: 'post',
+        url: '/chat/addUser',  // 如果是第一次访问，就让后端建立一个用户
+      })
+      .then((res) => {
+        console.log(res);
+      })
+    }
+  },
+
   methods: {
     show_id(state) {
       this.state = state;

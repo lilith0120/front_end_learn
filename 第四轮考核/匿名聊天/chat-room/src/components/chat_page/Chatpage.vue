@@ -10,7 +10,6 @@
     </template>
 
     <chatcontent :hideSearch="isSearch"></chatcontent>
-    <chatinput></chatinput>
   </div>
 </template>
 
@@ -18,14 +17,12 @@
 import chattitle from "./Chattitle";
 import search from "./Search";
 import chatcontent from "./Chatcontent";
-import chatinput from "./Chatinput";
 
 export default {
   components: {
     chattitle,
     search,
     chatcontent,
-    chatinput,
   },
 
   data() {

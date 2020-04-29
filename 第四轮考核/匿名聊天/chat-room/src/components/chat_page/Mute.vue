@@ -80,16 +80,20 @@ export default {
     };
   },
 
-  // created() {
-  //   this.$axios({
-  //     method: '',
-  //     url: '',  // 从后端获取房间信息
-  //   })
-  //   .then((res) => {
-  //     console.log(res);
-
-  //   })
-  // },
+  created() {
+    this.$axios({
+      method: 'get',
+      url: '/chat/getRoom',  // 从后端获取房间信息(给后端房间号)
+    })
+    .then((res) => {
+      console.log(res.status);
+      this.group_name = res.gName;
+      this.group_description = res.gDescription;
+      this.form_name = res.gName;
+      this.form_topic = res.gTopic;
+      this.form_description = res.gDescription;
+    })
+  },
 
   methods: {
     hide_mute() {

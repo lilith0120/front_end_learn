@@ -66,7 +66,7 @@
 export default {
   data() {
     return {
-      action_url: "", // 等后端的接口
+      action_url: "/chat/changeUser/", // 等后端的接口
       form_avatar: [],
       form_name: "",
       form_phone: "",
@@ -111,45 +111,24 @@ export default {
         uEmail: this.form_email
       };
 
-      if (document.cookie == "") {
-        this.$axios({
-          method: "get",
-          url: "", // 等后端的接口，这个是第一次访问该页面
-          data: data
-        }).then(res => {
-          console.log(res.info);
-          this.$notify({
-            title: "Success",
-            message: "Succeed to save preferences",
-            type: "success",
-            duration: 2000,
-            showClose: false
-          });
-          this.$emit("change_name", this.form_name);
-          this.$emit("change_phone", this.form_phone);
-          this.$emit("change_email", this.form_email);
-          this.$emit("change_avatar", this.form_avatar);
+      this.$axios({
+        method: "post",
+        url: "/chat/changeUser/", // 等后端的接口,修改用户信息
+        data: data
+      }).then(res => {
+        console.log(res.status);
+        this.$notify({
+          title: "Success",
+          message: "Succeed to save preferences",
+          type: "success",
+          duration: 2000,
+          showClose: false
         });
-      } else {
-        this.$axios({
-          method: "",
-          url: "",  // 等后端的接口,修改用户信息
-          data: data
-        }).then(res => {
-          console.log(res);
-          this.$notify({
-            title: "Success",
-            message: "Succeed to save preferences",
-            type: "success",
-            duration: 2000,
-            showClose: false
-          });
-          this.$emit("change_name", this.form_name);
-          this.$emit("change_phone", this.form_phone);
-          this.$emit("change_email", this.form_email);
-          this.$emit("change_avatar", this.form_avatar);
-        });
-      }
+        this.$emit("change_name", this.form_name);
+        this.$emit("change_phone", this.form_phone);
+        this.$emit("change_email", this.form_email);
+        this.$emit("change_avatar", this.form_avatar);
+      });
     },
 
     upload_avatar(file) {
