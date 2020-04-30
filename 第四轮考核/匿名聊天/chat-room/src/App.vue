@@ -13,9 +13,11 @@
         @show_share="show_share"
         :hideMute="isMute"
         :hideShare="isShare"
+        :changeName="group_name"
+        :changeTopic="group_topic"
       ></router-view>
       <template v-if="isMute === true">
-        <mute @hide_mute="hide_mute"></mute>
+        <mute @hide_mute="hide_mute" @change_gname="change_gname" @change_gtopic="change_gtopic"></mute>
       </template>
       <template v-else-if="isShare === true">
         <share @hide_share="hide_share"></share>
@@ -45,20 +47,10 @@ export default {
     return {
       state: 3,
       isMute: false,
-      isShare: false
+      isShare: false,
+      group_name: "",
+      group_topic: ""
     };
-  },
-
-  created() {
-    if(document.cookie == "") {
-      this.$axios({
-        method: 'post',
-        url: '/chat/addUser',  // 如果是第一次访问，就让后端建立一个用户
-      })
-      .then((res) => {
-        console.log(res);
-      })
-    }
   },
 
   methods: {
@@ -84,6 +76,14 @@ export default {
 
     hide_share(isShare) {
       this.isShare = isShare;
+    },
+
+    change_gname(name) {
+      this.group_name = name;
+    },
+
+    change_gtopic(topic) {
+      this.group_topic = topic;
     }
   }
 };

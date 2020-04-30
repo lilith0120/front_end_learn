@@ -22,8 +22,9 @@
             <el-upload
               class="upload"
               name="photo"
+              ref="photo"
               drag
-              action="#"
+              :action="action_url"
               accept="image/*"
               :auto-upload="false"
               :limit="1"
@@ -74,25 +75,27 @@ export default {
         "https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png",
       group_name: "NULL",
       group_description: "NULL",
+      action_url: "http://127.0.0.1:5000/chat/updateRoom_photo",
       form_name: "",
       form_topic: "",
-      form_description: ""
+      form_description: "",
+      room_id: this.$route.params.id
     };
   },
 
   created() {
     this.$axios({
-      method: 'get',
-      url: '/chat/getRoom',  // 从后端获取房间信息(给后端房间号)
-    })
-    .then((res) => {
+      method: "get",
+      url: `/chat/getRoom/${this.room_id}` // 从后端获取房间信息(给后端房间号)
+    }).then(res => {
       console.log(res.status);
-      this.group_name = res.gName;
-      this.group_description = res.gDescription;
-      this.form_name = res.gName;
-      this.form_topic = res.gTopic;
-      this.form_description = res.gDescription;
-    })
+      this.group_name = res.data.gName;
+      this.group_description = res.data.gDescription;
+      this.form_name = res.data.gName;
+      this.form_topic = res.data.gTopic;
+      this.form_description = res.data.gDescription;
+      this.photo_url = `${this.publicPath}image/${res.data.photoName}`;
+    });
   },
 
   methods: {
@@ -102,15 +105,29 @@ export default {
     },
 
     change_message() {
+      let url = `${this.action_url}/${this.room_id}`;
+      this.action_url = url;
+
+      let data = {
+        gName: this.form_name,
+        gTopic: this.form_topic,
+        gDescription: this.form_description
+      };
+
+      this.$refs.photo.submit();
+
       this.$axios({
-        method: '',
-        url: '',  // 将修改信息传给后端
-      })
-      .then((res) => {
-        console.log(res);
+        method: "post",
+        url: `/chat/updateRoom/${this.room_id}`, // 将修改信息传给后端
+        data: data
+      }).then(res => {
+        console.log(res.status);
         this.group_name = this.form_name;
         this.group_description = this.form_description;
-      })
+
+        this.$emit('change_gname', this.form_name);
+        this.$emit('change_gtopic', this.form_topic);
+      });
     }
   }
 };

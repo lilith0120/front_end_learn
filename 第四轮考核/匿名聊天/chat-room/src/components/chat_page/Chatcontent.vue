@@ -30,6 +30,7 @@
 import chatinput from "./Chatinput";
 
 export default {
+  name: 'Chatcontent',
   components: {
     chatinput,
   },
@@ -37,7 +38,7 @@ export default {
   data() {
     return {
       counts: 1,
-      items: [],
+      items: [] || JSON.parse(localStorage.group_items),
       avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
     };
   },
@@ -47,15 +48,11 @@ export default {
   sockets: {
     connect() {
       console.log('连接成功！');
-    },
-
-    // 监听在线人数
-    user(data) {
-      console.log('在线人数', data);
+      this.$socket.send('User has connected!');
     },
 
     // 接受其他人的信息
-    receive_message(data) {
+    message(data) {
       this.items.push(data);
     }
   },
@@ -66,16 +63,17 @@ export default {
 
   created() {
     this.$axios({
-      method: '',
-      url: '',  // 获取用户的头像信息
+      method: 'get',
+      url: '/chat/getUser',  // 获取用户的头像信息
     })
     .then((res) => {
-      console.log(res);
+      console.log(res.status);
+      this.avatar = `${this.publicPath}image/${res.data.avatarName}`;
     })
   },
 
   mounted() {
-    this.$socket.emit('connect', 1);
+    this.$socket.emit('connect');
   },
 
   watch: {
@@ -88,6 +86,11 @@ export default {
         this.$refs.Chatcontent.style.height = "46.45rem";
         this.$refs.content.style.height = "46.45rem";
       }
+    },
+
+    // 将聊天记录存入localstorage
+    items(newValue) {
+      localStorage.group_items = JSON.stringify(newValue);
     }
   },
 
@@ -108,7 +111,7 @@ export default {
     // },
 
     input_message(message) {
-      this.$socket.emit('send_group_message', {
+      this.$socket.send({
         message: message,
         avatar_url: this.avatar,
       });

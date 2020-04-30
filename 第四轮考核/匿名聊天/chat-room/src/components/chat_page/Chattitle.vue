@@ -38,6 +38,7 @@
 
 <script>
 export default {
+  name: 'Chattitle',
   data() {
     return {
       isMute: false,
@@ -53,23 +54,51 @@ export default {
     };
   },
 
-  // created() {
-  //   this.$axios({
-  //     method: '',
-  //     url: '',  // 从这里得到后端传来的房间信息
-  //   })
-  //   .then((res) => {
-  //     console.log(res);
-  //     if(document.cookie == res.cookie) {
-  //       this.isOwner = false;
-  //     }
-  //     else {
-  //       this.isOwner = true;
-  //     }
+  props: ["changeName", "changeTopic"],
 
-  //     // 从这里得到后端传来的房间信息
-  //   })
-  // },
+  created() {
+    this.$axios({
+      method: 'get',
+      url: `/chat/getRoom/${this.room_id}`,  // 从这里得到后端传来的房间信息
+    })
+    .then((res) => {
+      console.log(res.status);
+      let start = 7;
+      let userId = document.cookie.substr(start);
+      // console.log(userId);
+      // console.log(res.data.userId);
+      // console.log(userId == res.data.userId);
+      if(userId == res.data.userId) {
+        this.isOwner = false;
+      }
+      else {
+        this.isOwner = true;
+      }
+
+      this.group_name = res.data.gName;
+      this.group_topic = res.data.gTopic;
+      this.photo_url = `${this.publicPath}image/${res.data.photoName}`;
+      // 从这里得到后端传来的房间信息
+    })
+  },
+
+  watch: {
+    changeName(newValue) {
+      this.group_name = newValue;
+    },
+    
+    changeTopic(newValue) {
+      this.group_topic = newValue;
+    }
+  },
+
+  sockets: {
+    // 监听在线人数
+    user(data) {
+      console.log('在线人数', data);
+      this.group_num = data;
+    },
+  },
 
   methods: {
     // 显示群信息修改页面
@@ -100,9 +129,9 @@ export default {
         .then(() => {
           this.$axios({
             method: "delete",
-            url: ""  // 删除房间
+            url: `/chat/deleteRoom/${this.room_id}`  // 删除房间
           }).then(res => {
-            console.log(res);
+            console.log(res.status);
             this.$router.push("/");
             this.$router.go(0);
             this.$message({

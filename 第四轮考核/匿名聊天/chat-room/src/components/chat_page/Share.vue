@@ -43,20 +43,22 @@ export default {
         "https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png",
       group_name: "NULL",
       group_url: "NULL",
-      group_description: "NULL"
+      group_description: "NULL",
+      room_id: this.$route.params.id
     };
   },
 
   created() {
     this.$axios({
       method: 'get',
-      url: '/chat/getRoom',  // 从后端得到房间的信息(给后端房间号)
+      url: `/chat/getRoom/${this.room_id}`,  // 从后端得到房间的信息(给后端房间号)
     })
     .then((res) => {
       console.log(res.status);
-      this.group_name = res.gName;
+      this.group_name = res.data.gName;
       this.group_url = window.location.href;
-      this.group_description = res.gDescription;
+      this.group_description = res.data.gDescription;
+      this.photo_url = `${this.publicPath}image/${res.data.photoName}`;
     })
   },
 

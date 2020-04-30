@@ -16,7 +16,7 @@
       <div id="profile_name">
         <el-card class="card_name" shadow="never">
           <div id="avatar">
-            <el-avatar :size="90" fit="contain" :src="avatar_url" :key="avatar_url"></el-avatar>
+            <el-avatar :size="90" fit="cover" :src="avatar_url" :key="avatar_url"></el-avatar>
           </div>
 
           <div id="name">{{user_name}}</div>
@@ -70,26 +70,36 @@ export default {
 
   data() {
     return {
+      publicPath: process.env.BASE_URL,
       search_input: "",
       avatar_url: "",
-      user_name: "",
+      user_name: "undefined",
       form_phone: "",
       form_email: ""
     };
   },
 
   created() {
-        this.$axios({
-          method: "get",
-          url: "/chat/getUser",
-        })
-        .then((res) => {
-          console.log(res.status);
-          this.user_name = res.uName;
-          this.form_phone = res.uPhone;
-          this.form_email = res.uEmail;
-          // this.avatar_url = res.uAvatar;
-        })
+    if (document.cookie == "") {
+      this.$axios({
+        method: "post",
+        url: "/chat/addUser" // 如果是第一次访问，就让后端建立一个用户
+      }).then(res => {
+        console.log(res.status);
+      });
+    } else {
+      this.$axios({
+        method: "get",
+        url: "/chat/getUser"
+      }).then(res => {
+        console.log(res.status);
+        this.user_name = res.data.uName;
+        this.form_phone = res.data.uPhone;
+        this.form_email = res.data.uEmail;
+        this.avatar_url = `${this.publicPath}image/${res.data.avatarName}`;
+        console.log(this.avatar_url);
+      });
+    }
   },
 
   methods: {
@@ -106,9 +116,10 @@ export default {
     },
 
     change_avatar(avatar) {
-      this.avatar_url = avatar;
+      console.log(avatar);
+      this.avatar_url = `${this.publicPath}image/${avatar}`;
     }
-  },
+  }
 };
 </script>
 

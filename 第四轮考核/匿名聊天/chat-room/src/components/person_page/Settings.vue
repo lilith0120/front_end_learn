@@ -24,8 +24,8 @@
               name="avatar"
               ref="avatar"
               drag
-              action="action_url"
               accept="image/*"
+              :action="action_url"
               :on-change="upload_avatar"
               :auto-upload="false"
               :limit="1"
@@ -66,7 +66,7 @@
 export default {
   data() {
     return {
-      action_url: "/chat/changeUser/", // 等后端的接口
+      action_url: "http://127.0.0.1:5000/chat/changeAvatar", // 等后端的接口
       form_avatar: [],
       form_name: "",
       form_phone: "",
@@ -113,7 +113,7 @@ export default {
 
       this.$axios({
         method: "post",
-        url: "/chat/changeUser/", // 等后端的接口,修改用户信息
+        url: "/chat/changeUser", // 等后端的接口,修改用户信息
         data: data
       }).then(res => {
         console.log(res.status);
@@ -124,6 +124,7 @@ export default {
           duration: 2000,
           showClose: false
         });
+        this.form_avatar = res.data.avatarName;
         this.$emit("change_name", this.form_name);
         this.$emit("change_phone", this.form_phone);
         this.$emit("change_email", this.form_email);

@@ -4,6 +4,8 @@
       @show_mute="show_mute" 
       @show_share="show_share" 
       @search_toggle="search_toggle"
+      :changeName="changeName"
+      :changeTopic="changeTopic"
     ></chattitle>
     <template v-if="isSearch === true">
       <search></search>
@@ -33,7 +35,7 @@ export default {
     };
   },
 
-  props: ["hideMute", "hideShare"],
+  props: ["hideMute", "hideShare", "changeName", "changeTopic"],
 
   watch: {
     // 群信息修改页面的出现和隐藏

@@ -3,8 +3,8 @@ import App from './App.vue'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
-Vue.prototype.$axios = axios
 axios.defaults.withCredentials = true
+Vue.prototype.$axios = axios
 import router from './router/index'
 import VueSocketIO from 'vue-socket.io';
 

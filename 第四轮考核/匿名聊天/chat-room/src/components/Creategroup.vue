@@ -19,8 +19,8 @@
             name="photo"
             ref="photo"
             drag
-            action="action_url"
             accept="image/*"
+            action
             :on-change="upload_photo"
             :auto-upload="false"
             :limit="1"
@@ -70,7 +70,6 @@ export default {
   data() {
     return {
       search_input: "",
-      action_url: "/chat/createGroup",
       form_photo: [],
       form_name: "",
       form_topic: "",
@@ -80,10 +79,6 @@ export default {
 
   methods: {
     create_group() {
-      // this.$router.push({
-      //   path: `/roomId/1`,
-      // })
-      // this.$router.go(0);  // 测试数据
       if (this.form_name == "") {
         this.$notify({
           title: "Warning",
@@ -114,23 +109,26 @@ export default {
           duration: 2000,
           showClose: false
         });
+
         return;
       }
 
-      this.$refs.photo.submit();
+      let form_data = new FormData();
+      form_data.append("gName", this.form_name);
+      form_data.append("gTopic", this.form_topic);
+      form_data.append("gDescription", this.form_description);
+      form_data.append("photo", this.form_photo);
 
-      let data = {
-        gName: this.form_name,
-        gTopic: this.form_topic,
-        gDescription: this.form_description
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       };
-
-      this.$axios({
-        method: "post",
-        url: "/chat/createGroup", // 等后端的接口
-        data: data
-      }).then(res => {
-        if (res.status == "error") {
+      
+      console.log(form_data.photo);
+      this.$refs.photo.submit();
+      this.$axios.post("/chat/createGroup", form_data, config).then(res => {
+        if (res.data.status == "error") {
           this.$notify({
             title: "Warning",
             message: "该房间名已存在!",
@@ -139,14 +137,14 @@ export default {
             showClose: false
           });
         } else {
-          let url = `${window.location.origin}/#/roomId/${res.roomId}`;
+          let url = `${window.location.origin}/#/roomId/${res.data.roomId}`;
           this.$alert(`创建房间成功，房间链接为${url}`, "提示", {
             confirmButtonText: "确定",
             type: "success",
             callback: () => {
-              console.log(res.roomId);
+              console.log(res.data.roomId);
               this.$router.push({
-                path: `/roomId/${res.roomId}`
+                path: `/roomId/${res.data.roomId}`
               });
               this.$router.go(0);
             }
@@ -156,7 +154,8 @@ export default {
     },
 
     upload_photo(file) {
-      (this.form_photo = []), this.form_photo.push(file.raw);
+      this.form_photo = [];
+      this.form_photo.push(file.raw);
     }
   }
 };
