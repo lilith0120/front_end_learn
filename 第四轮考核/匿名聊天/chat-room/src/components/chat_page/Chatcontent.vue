@@ -37,7 +37,7 @@ export default {
 
   data() {
     return {
-      counts: 1,
+      publicPath: process.env.BASE_URL,
       items: [] || JSON.parse(localStorage.group_items),
       avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
     };
@@ -48,12 +48,17 @@ export default {
   sockets: {
     connect() {
       console.log('连接成功！');
-      this.$socket.send('User has connected!');
+      // this.$socket.send('User has connected!');
     },
 
     // 接受其他人的信息
     message(data) {
       this.items.push(data);
+    },
+
+    respond(data) {
+      console.log(data);
+      console.log('在线人数', data.num);
     }
   },
 

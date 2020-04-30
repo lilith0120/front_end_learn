@@ -41,6 +41,7 @@ export default {
   name: 'Chattitle',
   data() {
     return {
+      publicPath: process.env.BASE_URL,
       isMute: false,
       isShare: false,
       isSearch: false,
